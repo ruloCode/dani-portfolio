@@ -406,8 +406,12 @@ body {
 
 /* Geometría de marca — personajes abstractos (formas CSS puras) */
 .geo { overflow: hidden; padding: 4.5rem 0 3.5rem; }
+/* Altura FIJA e idéntica en desktop y móvil: las recomposiciones cambian el
+   alto de cada figura, pero el track no se mueve — cero saltos de layout. */
 .geo-track {
   --u: clamp(44px, 6vw, 78px);
+  height: 430px;
+  position: relative; /* ancla de las piezas absolutas en modo física */
   max-width: 1280px; margin: 0 auto; padding: 0 2rem;
   display: flex; justify-content: space-between; align-items: flex-end;
   gap: 1.5rem;
@@ -431,18 +435,11 @@ body {
 .geo .arm-acid::before { background: var(--p3); }
 /* durante la recomposición FLIP, las formas ceden su transform */
 .geo-morphing .g { animation: none !important; }
+/* en modo física (caída), Matter es dueño de todos los transforms */
+.geo-falling .g { animation: none !important; }
+.geo-track.is-physics { cursor: grab; }
+.geo-track.is-physics:active { cursor: grabbing; }
 
-.geo-label {
-  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-  color: var(--text-dim); margin-bottom: 2.4rem;
-}
-#geo-palette-name { color: var(--text); min-width: 5.5rem; text-align: left; }
-.geo-swatches { display: inline-flex; gap: 0.35rem; margin-left: 0.4rem; }
-.geo-swatches i {
-  width: 11px; height: 11px; border-radius: 50%;
-  border: 1px solid rgba(25, 20, 48, 0.12);
-  transition: background-color 0.9s ease;
-}
 .geo .g-x, .deco .g-x { animation: g-wiggle 5s ease-in-out infinite alternate; }
 .geo .g-donut, .deco .g-donut { animation: g-pulse 4s ease-in-out infinite alternate; }
 .geo .g-circle, .deco .g-circle { animation: g-float 3.6s ease-in-out infinite alternate; }
@@ -506,11 +503,12 @@ body {
   .geo-fig-5 { display: none; }
 }
 @media (max-width: 620px) {
-  /* 2×2 parejo en móvil (el wrap 3+1 se veía raro) */
+  /* 2×2 parejo en móvil, MISMA altura de 430px que desktop */
   .geo-track {
     display: grid; grid-template-columns: repeat(2, auto);
-    justify-content: space-evenly; align-items: end; row-gap: 2.6rem;
-    --u: clamp(34px, 10vw, 48px);
+    grid-template-rows: 1fr 1fr;
+    justify-content: space-evenly; align-items: end; row-gap: 1.6rem;
+    --u: clamp(30px, 8.6vw, 40px);
   }
 }
 

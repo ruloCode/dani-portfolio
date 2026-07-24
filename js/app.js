@@ -120,6 +120,17 @@ async function init() {
   startDecoPhysics();
   startGeoShow();
   startMotion();
+
+  // fallback del disparo de la caída sin GSAP/ScrollTrigger (CDN caído)
+  if (!window.gsap || !window.ScrollTrigger) {
+    const about = document.getElementById("sobre-mi");
+    if (about) {
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { startGeoFall(); io.disconnect(); }
+      }, { threshold: 0.1 });
+      io.observe(about);
+    }
+  }
 }
 
 /* Show de color en la sección de geometría: cada ~4s muta la paleta (crossfade
@@ -136,8 +147,6 @@ const PALETTES = [
 function startGeoShow() {
   const geo = document.querySelector(".geo");
   if (!geo) return;
-  const nameEl = document.getElementById("geo-palette-name");
-  const swatches = document.querySelectorAll("#geo-swatches i");
 
   let idx = 0;
   let cycle = 0;
@@ -147,8 +156,6 @@ function startGeoShow() {
 
   function applyPalette(p) {
     p.colors.forEach((c, i) => geo.style.setProperty(`--p${i + 1}`, c));
-    nameEl.textContent = p.name;
-    swatches.forEach((s, i) => { s.style.backgroundColor = p.colors[i]; });
   }
   applyPalette(PALETTES[0]);
 
@@ -156,7 +163,8 @@ function startGeoShow() {
     return [...geo.querySelectorAll(".geo-fig")].filter((f) => f.offsetParent !== null);
   }
 
-  // rota la fila `pick` (0 = cabezas, -1 = piernas) una figura a la derecha
+  // rota la fila `pick` (0 = cabezas, -1 = piernas): las piezas VIAJAN con giro
+  // y aterrizan con rebote elástico (squash & stretch) — física de caricatura
   function recompose() {
     if (!window.gsap || !window.Flip) return;
     const figs = figures();
@@ -176,8 +184,19 @@ function startGeoShow() {
       else dest.appendChild(part);
     });
     Flip.from(state, {
-      duration: 1, ease: "power2.inOut", absolute: true, stagger: 0.05,
-      onComplete: () => geo.classList.remove("geo-morphing"),
+      duration: 1.15, ease: "power3.inOut", absolute: true, spin: 1, stagger: 0.06,
+      onComplete: () => {
+        gsap.fromTo(parts,
+          { scaleY: 0.78, scaleX: 1.18, transformOrigin: "50% 100%" },
+          {
+            scaleY: 1, scaleX: 1, duration: 0.65, ease: "elastic.out(1, 0.42)",
+            stagger: 0.04,
+            onComplete: () => {
+              gsap.set(parts, { clearProps: "transform" });
+              geo.classList.remove("geo-morphing");
+            },
+          });
+      },
     });
   }
 
@@ -186,8 +205,118 @@ function startGeoShow() {
     cycle++;
     idx = (idx + 1) % PALETTES.length;
     applyPalette(PALETTES[idx]);
-    if (cycle % 2 === 1) recompose();
+    if (cycle % 2 === 1 && !geoFallen) recompose();
   }, 4000);
+}
+
+/* FINAL DE FÍSICA: al llegar el scroll a "Sobre mí", las piezas se sueltan y
+   CAEN con gravedad (Matter.js) — rebotan, se apilan en el piso de la sección,
+   se arrastran con el mouse y reciben impulso del scroll. La paleta sigue
+   mutando sobre la pila. */
+let geoFallen = false;
+
+function startGeoFall() {
+  if (geoFallen || !window.Matter) return;
+  const geo = document.querySelector(".geo");
+  const track = geo?.querySelector(".geo-track");
+  if (!track) return;
+  // si hay un morph FLIP en vuelo, esperar a que aterrice
+  if (geo.classList.contains("geo-morphing")) {
+    setTimeout(startGeoFall, 1500);
+    return;
+  }
+  geoFallen = true;
+  geo.classList.add("geo-falling");
+  if (window.gsap) gsap.killTweensOf(".geo-fig");
+
+  const { Engine, Bodies, Body, Composite, Mouse, MouseConstraint } = Matter;
+  const tRect = track.getBoundingClientRect();
+  const parts = [...track.querySelectorAll(".g")].filter((el) => el.offsetParent !== null);
+  const items = parts.map((el) => {
+    const r = el.getBoundingClientRect();
+    return { el, x: r.left - tRect.left, y: r.top - tRect.top, w: r.width, h: r.height };
+  });
+
+  // reparentar las piezas al track como absolutas (misma posición visual)
+  for (const it of items) {
+    track.appendChild(it.el);
+    Object.assign(it.el.style, {
+      position: "absolute", left: "0px", top: "0px", margin: "0",
+      width: `${it.w}px`, height: `${it.h}px`,
+      transformOrigin: "50% 50%",
+      transform: `translate(${it.x}px, ${it.y}px)`,
+    });
+  }
+  track.querySelectorAll(".geo-fig").forEach((f) => { f.style.display = "none"; });
+
+  const engine = Engine.create();
+  engine.gravity.y = 1.35;
+  const W = track.clientWidth;
+  const H = track.clientHeight;
+  const wallOpts = { isStatic: true, restitution: 0.3 };
+  const walls = [
+    Bodies.rectangle(W / 2, H + 58, W + 400, 120, wallOpts),      // piso
+    Bodies.rectangle(-58, H / 2 - 300, 120, H + 1000, wallOpts),  // izquierda
+    Bodies.rectangle(W + 58, H / 2 - 300, 120, H + 1000, wallOpts), // derecha
+  ];
+  const bodies = items.map((it) => {
+    const cx = it.x + it.w / 2;
+    const cy = it.y + it.h / 2;
+    const opts = { restitution: 0.45, friction: 0.55, frictionAir: 0.012 };
+    const round = /g-circle|g-donut/.test(it.el.className);
+    const b = round
+      ? Bodies.circle(cx, cy, Math.max(it.w, it.h) / 2, opts)
+      : Bodies.rectangle(cx, cy, it.w, it.h, opts);
+    Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.14);
+    Body.setVelocity(b, { x: (Math.random() - 0.5) * 3, y: -(1 + Math.random() * 2) });
+    it.body = b;
+    return b;
+  });
+  Composite.add(engine.world, [...walls, ...bodies]);
+
+  // arrastre con mouse (solo pointer fino: en touch bloquearía el scroll)
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const mouse = Mouse.create(track);
+    const mc = MouseConstraint.create(engine, {
+      mouse, constraint: { stiffness: 0.16, damping: 0.12 },
+    });
+    // la rueda y el touch siguen siendo de la página, no del motor
+    mouse.element.removeEventListener("wheel", mouse.mousewheel);
+    mouse.element.removeEventListener("touchstart", mouse.mousedown);
+    mouse.element.removeEventListener("touchmove", mouse.mousemove);
+    mouse.element.removeEventListener("touchend", mouse.mouseup);
+    Composite.add(engine.world, mc);
+    track.classList.add("is-physics");
+  }
+
+  // el scroll patea la pila — reacciona al ritmo del usuario
+  let lastY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const dy = window.scrollY - lastY;
+    lastY = window.scrollY;
+    const kick = Math.max(-9, Math.min(9, dy)) * 0.02;
+    for (const b of bodies) {
+      Body.setVelocity(b, { x: b.velocity.x, y: b.velocity.y - kick });
+    }
+  }, { passive: true });
+
+  let inView = true;
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { rootMargin: "120px" })
+    .observe(geo);
+
+  let last = performance.now();
+  (function step(now) {
+    requestAnimationFrame(step);
+    if (document.hidden || !inView) { last = now; return; }
+    const dt = Math.min(now - last, 33);
+    last = now;
+    Matter.Engine.update(engine, dt);
+    for (const it of items) {
+      const b = it.body;
+      it.el.style.transform =
+        `translate(${(b.position.x - it.w / 2).toFixed(1)}px, ${(b.position.y - it.h / 2).toFixed(1)}px) rotate(${b.angle.toFixed(3)}rad)`;
+    }
+  })(performance.now());
 }
 
 /* Física de la textura de fondo: cada shape deriva y REBOTA en los bordes de
@@ -816,17 +945,31 @@ function startMotion() {
     scrollTrigger: { trigger: ".expertise-grid", start: "top 82%" },
     opacity: 0, y: 40, duration: 0.7, ease: "power3.out", stagger: 0.1,
   });
-  // Figuras: entrada por escala (la y es del scrub — sin pelear por transform)
+  // Figuras: entrada por escala (la y es del scrub — sin pelear por transform);
+  // al terminar arranca la respiración idle (squash sutil desfasado — vivas)
   gsap.from(".geo-fig", {
     scrollTrigger: { trigger: ".geo", start: "top 82%" },
     opacity: 0, scale: 0.7, rotate: -5, transformOrigin: "50% 100%",
     duration: 0.8, ease: "back.out(1.7)", stagger: 0.12,
+    onComplete: () => {
+      document.querySelectorAll(".geo-fig").forEach((f, i) => {
+        gsap.to(f, {
+          scaleY: 1.025, scaleX: 0.992, transformOrigin: "50% 100%",
+          duration: 1.9 + i * 0.35, yoyo: true, repeat: -1, ease: "sine.inOut",
+          delay: i * 0.25,
+        });
+      });
+    },
   });
   document.querySelectorAll(".geo-fig").forEach((el, i) => {
     gsap.to(el, {
       scrollTrigger: { trigger: ".geo", start: "top bottom", end: "bottom top", scrub: true },
       y: -(26 + (i % 3) * 16), ease: "none",
     });
+  });
+  // al asomarse "Sobre mí", las piezas caen con gravedad (una sola vez)
+  ScrollTrigger.create({
+    trigger: "#sobre-mi", start: "top 88%", once: true, onEnter: startGeoFall,
   });
   gsap.from(".about-card", {
     scrollTrigger: { trigger: ".about", start: "top 80%" },
