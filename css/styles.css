@@ -121,15 +121,24 @@ body {
   max-width: 1280px; width: 100%;
   margin: 0 auto; padding: 7rem 2rem 3rem;
 }
-/* Over-light: velo crema detrás del texto para separarlo de las partículas.
-   Va sobre el canvas y bajo el contenido (hero-inner crea contexto en z-index:1). */
-.hero-inner::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(96deg,
-    var(--paper) 6%,
-    rgba(250, 247, 242, 0.72) 33%,
-    rgba(250, 247, 242, 0.16) 52%,
-    rgba(250, 247, 242, 0) 64%);
+/* Over-light FULL-BLEED sobre el canvas (patrón Runway/Artlist): cubre todo el
+   ancho del hero — jamás anclado al contenedor centrado, que deja un borde — y
+   cae con muchos stops en curva suave para que el ojo no encuentre el inicio. */
+.hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to right,
+    var(--paper) 0%,
+    var(--paper) 10%,
+    rgba(250, 247, 242, 0.97) 19%,
+    rgba(250, 247, 242, 0.9) 27%,
+    rgba(250, 247, 242, 0.78) 35%,
+    rgba(250, 247, 242, 0.62) 42%,
+    rgba(250, 247, 242, 0.45) 49%,
+    rgba(250, 247, 242, 0.29) 56%,
+    rgba(250, 247, 242, 0.16) 63%,
+    rgba(250, 247, 242, 0.07) 70%,
+    rgba(250, 247, 242, 0.02) 77%,
+    rgba(250, 247, 242, 0) 85%);
 }
 /* Halo de legibilidad para los textos pequeños que caen sobre partículas */
 .hero-kicker, .hero-sub, .hero-roles {
@@ -532,6 +541,12 @@ body.modal-open { overflow: hidden; }
     height: 100dvh;  /* respeta la toolbar de iOS Safari */
   }
   .modal-body { padding: 0 1.2rem 2rem; }
+  /* stats del statement centrados en móvil */
+  .statement { justify-content: center; }
+  .statement-stats {
+    width: 100%; justify-content: center; text-align: center; gap: 2rem;
+  }
+  .stat { align-items: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

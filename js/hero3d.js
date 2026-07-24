@@ -114,7 +114,8 @@ const points = new THREE.Points(geometry, material);
 points.rotation.x = -0.12;
 scene.add(points);
 
-// Mouse → parallax + cresta
+// Mouse → parallax + cresta. En táctiles no hay mouse: la cresta deriva sola.
+const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
 const target = new THREE.Vector2(0, 0);
 window.addEventListener("pointermove", (e) => {
   target.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -143,6 +144,11 @@ function tick() {
   if (!inView || !tabVisible) return;
   const t = clock.getElapsedTime();
   uniforms.uTime.value = prefersReduced ? 0 : t;
+  // deriva autónoma en táctiles: cresta paseando en Lissajous + parallax vivo
+  if (!finePointer && !prefersReduced) {
+    target.x = Math.sin(t * 0.3) * 0.6;
+    target.y = Math.sin(t * 0.19 + 1.6) * 0.5;
+  }
   uniforms.uMouse.value.lerp(target, 0.06);
   camera.position.x += (target.x * 0.7 - camera.position.x) * 0.03;
   camera.position.y += (2.2 + target.y * 0.4 - camera.position.y) * 0.03;
