@@ -116,7 +116,30 @@ async function init() {
 
   // el tilt incluye cards renderizadas arriba; motion revela el hero pase lo que pase
   bindTilt();
+  animateCounters();
   startMotion();
+}
+
+/* Contadores del statement: incrementan al entrar en viewport — JS puro,
+   funcionan igual con o sin GSAP y con reduced-motion. */
+function animateCounters() {
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting || e.target.dataset.done) continue;
+      e.target.dataset.done = "1";
+      const end = Number(e.target.dataset.count);
+      const t0 = performance.now();
+      const dur = 1600;
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        e.target.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      io.unobserve(e.target);
+    }
+  }, { threshold: 0.6 });
+  document.querySelectorAll(".stat-num").forEach((el) => io.observe(el));
 }
 
 function renderSocial(profile) {
@@ -492,14 +515,18 @@ function startTitleCycle(line) {
     // en móvil el tamaño es FIJO por CSS (clamp por vw): cero reflow por tecla
     if (mobileFixed.matches) { line.style.fontSize = ""; return; }
     line.style.fontSize = "";
-    // margen de seguridad: sin él, el redondeo subpixel recorta la última letra
-    const max = line.parentElement.clientWidth - 10;
     let size = parseFloat(getComputedStyle(line).fontSize);
     let guard = 60;
-    while (line.scrollWidth > max && size > 14 && guard--) {
+    // OJO: comparar contra clientWidth con margen rompe el loop (en flex,
+    // scrollWidth nunca baja de clientWidth y encogía hasta el piso).
+    // Se detecta overflow real y el colchón subpixel va como paso FINAL.
+    let shrunk = false;
+    while (line.scrollWidth > line.clientWidth && size > 14 && guard--) {
       size *= 0.94;
       line.style.fontSize = `${size}px`;
+      shrunk = true;
     }
+    if (shrunk) line.style.fontSize = `${size * 0.97}px`;
   }
   window.addEventListener("resize", fit);
 
@@ -542,15 +569,12 @@ function startMotion() {
   const title = $(".hero-title");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Camino estático: sin GSAP, sin ScrollTrigger o con reduced-motion —
-  // todo visible y contadores con su valor final. El typewriter SÍ corre
-  // (es contenido, no decoración: muestra los servicios; JS puro sin GSAP).
-  if (!window.gsap || !window.ScrollTrigger || reduced) {
+  // Camino estático SOLO si faltan GSAP/ScrollTrigger (CDN caído). Con
+  // reduced-motion el sitio anima igual — este portafolio ES motion, decisión
+  // de la dueña; los contadores van aparte (animateCounters).
+  if (!window.gsap || !window.ScrollTrigger) {
     document.documentElement.classList.add("gsap-done");
     title.classList.add("ready");
-    document.querySelectorAll(".stat-num").forEach((el) => {
-      el.textContent = el.dataset.count;
-    });
     setTimeout(() => startTitleCycle(title.querySelector(".line.accent")), 3000);
     return;
   }
@@ -600,16 +624,31 @@ function startMotion() {
     opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.14, delay: 0.15,
   });
 
-  // Statement: líneas + contadores
+  // El hero se disuelve al salir — todo interactúa con el scroll
+  gsap.to(".hero-inner", {
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom 35%", scrub: true },
+    yPercent: -10, opacity: 0.25, ease: "none",
+  });
+
+  // Títulos de sección: parallax scrub al entrar
+  document.querySelectorAll(".section-title").forEach((el) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: "top 96%", end: "top 58%", scrub: true },
+      y: 36, opacity: 0.25, ease: "none",
+    });
+  });
+
+  // Statement (los contadores van por animateCounters, sin GSAP)
   gsap.from(".statement-text", {
     scrollTrigger: { trigger: ".statement", start: "top 75%" },
     opacity: 0, y: 40, duration: 0.9, ease: "power3.out",
   });
-  document.querySelectorAll(".stat-num").forEach((el) => {
-    const end = Number(el.dataset.count);
-    gsap.fromTo(el, { innerText: 0 }, {
-      innerText: end, duration: 1.6, ease: "power2.out", snap: { innerText: 1 },
-      scrollTrigger: { trigger: el, start: "top 85%" },
+
+  // Textura geométrica de fondo: deriva con el scroll de su sección
+  document.querySelectorAll(".deco").forEach((d) => {
+    gsap.to(d.children, {
+      scrollTrigger: { trigger: d.parentElement, start: "top bottom", end: "bottom top", scrub: true },
+      y: -46, ease: "none",
     });
   });
 
@@ -635,9 +674,17 @@ function startMotion() {
     scrollTrigger: { trigger: ".expertise-grid", start: "top 82%" },
     opacity: 0, y: 40, duration: 0.7, ease: "power3.out", stagger: 0.1,
   });
+  // Figuras: entrada por escala (la y es del scrub — sin pelear por transform)
   gsap.from(".geo-fig", {
     scrollTrigger: { trigger: ".geo", start: "top 82%" },
-    opacity: 0, y: 60, rotate: -5, duration: 0.8, ease: "back.out(1.7)", stagger: 0.12,
+    opacity: 0, scale: 0.7, rotate: -5, transformOrigin: "50% 100%",
+    duration: 0.8, ease: "back.out(1.7)", stagger: 0.12,
+  });
+  document.querySelectorAll(".geo-fig").forEach((el, i) => {
+    gsap.to(el, {
+      scrollTrigger: { trigger: ".geo", start: "top bottom", end: "bottom top", scrub: true },
+      y: -(26 + (i % 3) * 16), ease: "none",
+    });
   });
   gsap.from(".about-card", {
     scrollTrigger: { trigger: ".about", start: "top 80%" },

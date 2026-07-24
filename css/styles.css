@@ -387,19 +387,22 @@ body {
   display: flex; justify-content: space-between; align-items: flex-end;
   gap: 1.5rem;
 }
-.geo-fig {
-  display: flex; flex-direction: column; align-items: center;
-  animation: geo-bob 7s ease-in-out infinite alternate;
-}
-.geo-fig:nth-child(2) { animation-delay: -2s; animation-duration: 8s; }
-.geo-fig:nth-child(3) { animation-delay: -4s; animation-duration: 6.5s; }
-.geo-fig:nth-child(4) { animation-delay: -1s; animation-duration: 7.5s; }
-.geo-fig:nth-child(5) { animation-delay: -3s; animation-duration: 8.5s; }
-@keyframes geo-bob {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(var(--u) * -0.14)); }
-}
+/* La figura NO se anima por CSS: su transform es de GSAP (entrada + scrub de
+   scroll). El motion graphics vive en las FORMAS — sin pelear por transform. */
+.geo-fig { display: flex; flex-direction: column; align-items: center; }
 .g { position: relative; }
+.geo .g-x, .deco .g-x { animation: g-wiggle 5s ease-in-out infinite alternate; }
+.geo .g-donut, .deco .g-donut { animation: g-pulse 4s ease-in-out infinite alternate; }
+.geo .g-circle, .deco .g-circle { animation: g-float 3.6s ease-in-out infinite alternate; }
+.geo .g-arch-hole, .deco .g-arch-hole { animation: g-float 4.4s ease-in-out infinite alternate-reverse; }
+.geo .g-square-hole, .deco .g-square-hole { animation: g-pulse 5.2s ease-in-out infinite alternate-reverse; }
+.geo-fig:nth-child(2) .g { animation-delay: -1.3s; }
+.geo-fig:nth-child(3) .g { animation-delay: -2.6s; }
+.geo-fig:nth-child(4) .g { animation-delay: -0.7s; }
+.geo-fig:nth-child(5) .g { animation-delay: -1.9s; }
+@keyframes g-wiggle { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+@keyframes g-pulse { from { transform: scale(1); } to { transform: scale(1.07); } }
+@keyframes g-float { from { transform: translateY(0); } to { transform: translateY(-7%); } }
 .c-violet { --c: var(--violet); }
 .c-lila { --c: var(--violet-soft); }
 .c-acid { --c: var(--acid); }
@@ -449,6 +452,26 @@ body {
 @media (max-width: 980px) {
   .geo-track { flex-wrap: wrap; justify-content: center; gap: 2.2rem; --u: clamp(38px, 9vw, 58px); }
   .geo-fig-5 { display: none; }
+}
+@media (max-width: 620px) {
+  /* 2×2 parejo en móvil (el wrap 3+1 se veía raro) */
+  .geo-track {
+    display: grid; grid-template-columns: repeat(2, auto);
+    justify-content: space-evenly; align-items: end; row-gap: 2.6rem;
+    --u: clamp(34px, 10vw, 48px);
+  }
+}
+
+/* Textura geométrica de fondo — detrás del contenido de cada sección */
+.statement, .work, .archive, .expertise, .contact { position: relative; }
+.deco {
+  position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  --u: clamp(26px, 3.2vw, 42px);
+}
+.deco .g { position: absolute; opacity: 0.16; }
+@media (max-width: 620px) {
+  .deco { --u: 22px; }
+  .deco .g { opacity: 0.12; }
 }
 
 /* Sobre mí */
@@ -628,11 +651,12 @@ body.modal-open { overflow: hidden; }
   .hero-foot { order: 3; margin-top: 1.6rem; }
   /* tamaño FIJO para la línea que teclea: cabe "MOTION GRAPHICS" completo
      desde la primera letra — nada de re-encoger por tecla (saltaba) */
-  .hero-title .line.accent.cycling { font-size: clamp(1.2rem, 6.4vw, 2.6rem) !important; }
+  .hero-title .line.accent.cycling { font-size: clamp(1rem, 5vw, 1.9rem) !important; }
 }
 
+/* Reduced-motion: este portafolio ES motion (decisión de la dueña) — solo se
+   apagan el grano (flicker) y el cursor custom; el resto respira más lento. */
 @media (prefers-reduced-motion: reduce) {
-  .grain, .marquee-track, .hero-scroll-line { animation: none; }
+  .grain { animation: none; }
   .cursor, .cursor-dot { display: none; }
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
