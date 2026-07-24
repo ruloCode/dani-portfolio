@@ -249,15 +249,30 @@ function startGeoFall() {
   }
   track.querySelectorAll(".geo-fig").forEach((f) => { f.style.display = "none"; });
 
+  // MUNDO EXTENDIDO: del tope del track al FONDO de "Sobre mí" — las piezas
+  // caen literalmente sobre esa sección y rebotan en la card
+  const aboutSect = document.querySelector(".about");
+  const aboutCard = document.querySelector(".about-card");
+  const aRect = aboutSect.getBoundingClientRect();
+  const cRect = aboutCard.getBoundingClientRect();
+  const W = track.clientWidth;
+  const floorY = aRect.bottom - tRect.top - 6;
+
   const engine = Engine.create();
   engine.gravity.y = 1.35;
-  const W = track.clientWidth;
-  const H = track.clientHeight;
-  const wallOpts = { isStatic: true, restitution: 0.3 };
-  const walls = [
-    Bodies.rectangle(W / 2, H + 58, W + 400, 120, wallOpts),      // piso
-    Bodies.rectangle(-58, H / 2 - 300, 120, H + 1000, wallOpts),  // izquierda
-    Bodies.rectangle(W + 58, H / 2 - 300, 120, H + 1000, wallOpts), // derecha
+  const wallOpts = { isStatic: true, restitution: 0.35 };
+  const statics = [
+    Bodies.rectangle(W / 2, floorY + 60, W + 400, 120, wallOpts),            // piso: fondo de Sobre mí
+    Bodies.rectangle(W / 2, -130, W + 400, 120, wallOpts),                   // techo (para la flotación)
+    Bodies.rectangle(-58, floorY / 2, 120, floorY + 600, wallOpts),          // izquierda
+    Bodies.rectangle(W + 58, floorY / 2, 120, floorY + 600, wallOpts),       // derecha
+    // la card de Sobre mí es un obstáculo real: las piezas rebotan encima
+    Bodies.rectangle(
+      cRect.left - tRect.left + cRect.width / 2,
+      cRect.top - tRect.top + cRect.height / 2,
+      cRect.width, cRect.height,
+      { isStatic: true, restitution: 0.4 }
+    ),
   ];
   const bodies = items.map((it) => {
     const cx = it.x + it.w / 2;
@@ -270,47 +285,124 @@ function startGeoFall() {
     Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.14);
     Body.setVelocity(b, { x: (Math.random() - 0.5) * 3, y: -(1 + Math.random() * 2) });
     it.body = b;
+    it.homeX = cx; it.homeY = cy; // posición inicial (estructura)
     return b;
   });
-  Composite.add(engine.world, [...walls, ...bodies]);
+  Composite.add(engine.world, [...statics, ...bodies]);
 
-  // arrastre con mouse (solo pointer fino: en touch bloquearía el scroll)
+  /* Estados: fall (gravedad) → return (vuelven a su estructura si nadie
+     interactúa) → float (gravedad cero: llenan y recorren todo el espacio). */
+  let mode = "fall";
+  const setMode = (m) => { mode = m; geo.dataset.phys = m; };
+  geo.dataset.phys = "fall";
+  let lastDrag = performance.now();
+  const fallTime = performance.now();
+
+  // drag por raycast en TODO el documento (Matter.Mouse solo oiría el track):
+  // agarra solo si el punto toca una pieza — no roba clics de "Sobre mí"
+  let drag = null;
   if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    const mouse = Mouse.create(track);
-    const mc = MouseConstraint.create(engine, {
-      mouse, constraint: { stiffness: 0.16, damping: 0.12 },
+    const toLocal = (e) => {
+      const r = track.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    };
+    document.addEventListener("mousedown", (e) => {
+      if (mode === "return") return; // en vuelo a casa no se agarra
+      const pt = toLocal(e);
+      const hit = Matter.Query.point(bodies, pt)[0];
+      if (!hit) return;
+      e.preventDefault();
+      drag = { body: hit, lastPt: pt, v: { x: 0, y: 0 } };
+      lastDrag = performance.now();
+      document.body.style.cursor = "grabbing";
     });
-    // la rueda y el touch siguen siendo de la página, no del motor
-    mouse.element.removeEventListener("wheel", mouse.mousewheel);
-    mouse.element.removeEventListener("touchstart", mouse.mousedown);
-    mouse.element.removeEventListener("touchmove", mouse.mousemove);
-    mouse.element.removeEventListener("touchend", mouse.mouseup);
-    Composite.add(engine.world, mc);
+    document.addEventListener("mousemove", (e) => {
+      if (!drag) return;
+      const pt = toLocal(e);
+      drag.v = { x: pt.x - drag.lastPt.x, y: pt.y - drag.lastPt.y };
+      Body.setPosition(drag.body, pt);
+      Body.setVelocity(drag.body, { x: 0, y: 0 });
+      drag.lastPt = pt;
+      lastDrag = performance.now();
+    });
+    document.addEventListener("mouseup", () => {
+      if (!drag) return;
+      Body.setVelocity(drag.body, { x: drag.v.x * 1.4, y: drag.v.y * 1.4 }); // lanzamiento
+      drag = null;
+      lastDrag = performance.now();
+      document.body.style.cursor = "";
+    });
     track.classList.add("is-physics");
   }
 
-  // el scroll patea la pila — reacciona al ritmo del usuario
+  // el scroll patea las piezas — reaccionan al ritmo del usuario
   let lastY = window.scrollY;
   window.addEventListener("scroll", () => {
     const dy = window.scrollY - lastY;
     lastY = window.scrollY;
-    const kick = Math.max(-9, Math.min(9, dy)) * 0.02;
+    const kick = Math.max(-9, Math.min(9, dy)) * (mode === "float" ? 0.008 : 0.02);
     for (const b of bodies) {
       Body.setVelocity(b, { x: b.velocity.x, y: b.velocity.y - kick });
     }
   }, { passive: true });
 
+  function beginFloat() {
+    setMode("float");
+    engine.gravity.y = 0;
+    for (const b of bodies) {
+      b.restitution = 0.95;
+      b.frictionAir = 0.0035;
+      const a = Math.random() * Math.PI * 2;
+      const s = 1.6 + Math.random() * 1.8;
+      Body.setVelocity(b, { x: Math.cos(a) * s, y: Math.sin(a) * s });
+      Body.setAngularVelocity(b, (Math.random() - 0.5) * 0.06);
+    }
+  }
+
   let inView = true;
-  new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { rootMargin: "120px" })
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { rootMargin: "160px" })
     .observe(geo);
 
   let last = performance.now();
+  let holdUntil = 0;
   (function step(now) {
     requestAnimationFrame(step);
     if (document.hidden || !inView) { last = now; return; }
     const dt = Math.min(now - last, 33);
     last = now;
-    Matter.Engine.update(engine, dt);
+
+    if (mode === "fall") {
+      // sin interacción por 7s (y tras asentarse) → regreso a la estructura
+      if (now - fallTime > 5000 && now - lastDrag > 7000) setMode("return");
+      Matter.Engine.update(engine, dt);
+    } else if (mode === "return") {
+      // lerp suave de cada pieza a su casa; el motor descansa
+      let done = true;
+      for (const it of items) {
+        const b = it.body;
+        const nx = b.position.x + (it.homeX - b.position.x) * 0.09;
+        const ny = b.position.y + (it.homeY - b.position.y) * 0.09;
+        const na = b.angle * 0.91;
+        Body.setPosition(b, { x: nx, y: ny });
+        Body.setAngle(b, na);
+        Body.setVelocity(b, { x: 0, y: 0 });
+        Body.setAngularVelocity(b, 0);
+        if (Math.abs(nx - it.homeX) > 1.5 || Math.abs(ny - it.homeY) > 1.5 || Math.abs(na) > 0.02) done = false;
+      }
+      if (done && !holdUntil) holdUntil = now + 1100; // pausa en la estructura
+      if (holdUntil && now > holdUntil) beginFloat();
+    } else {
+      // float: deriva perpetua; un empujoncito si alguna se queda quieta
+      for (const b of bodies) {
+        const sp = Math.hypot(b.velocity.x, b.velocity.y);
+        if (sp < 0.35) {
+          const a = Math.random() * Math.PI * 2;
+          Body.setVelocity(b, { x: b.velocity.x + Math.cos(a) * 0.5, y: b.velocity.y + Math.sin(a) * 0.5 });
+        }
+      }
+      Matter.Engine.update(engine, dt);
+    }
+
     for (const it of items) {
       const b = it.body;
       it.el.style.transform =

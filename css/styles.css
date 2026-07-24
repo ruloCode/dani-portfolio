@@ -405,7 +405,9 @@ body {
 .exp-card p { color: var(--text-dim); font-size: 0.88rem; }
 
 /* Geometría de marca — personajes abstractos (formas CSS puras) */
-.geo { overflow: hidden; padding: 4.5rem 0 3.5rem; }
+.geo { overflow: hidden; padding: 4.5rem 0 0.6rem; }
+/* en modo física las piezas se derraman sobre "Sobre mí": sin clip y encima */
+.geo.geo-falling { overflow: visible; position: relative; z-index: 2; }
 /* Altura FIJA e idéntica en desktop y móvil: las recomposiciones cambian el
    alto de cada figura, pero el track no se mueve — cero saltos de layout. */
 .geo-track {
@@ -531,8 +533,8 @@ body {
   .deco .g:nth-child(odd) { opacity: 0.08; }
 }
 
-/* Sobre mí */
-.about { max-width: 1280px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+/* Sobre mí — pegado a la geometría: las piezas caen literalmente encima */
+.about { max-width: 1280px; margin: 0 auto; padding: 0.75rem 2rem 5rem; }
 .about-card {
   display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;
   border: 1px solid var(--line); border-radius: 20px;
