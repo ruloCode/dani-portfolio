@@ -379,6 +379,78 @@ body {
 }
 .exp-card p { color: var(--text-dim); font-size: 0.88rem; }
 
+/* Geometría de marca — personajes abstractos (formas CSS puras) */
+.geo { overflow: hidden; padding: 4.5rem 0 3.5rem; }
+.geo-track {
+  --u: clamp(44px, 6vw, 78px);
+  max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 1.5rem;
+}
+.geo-fig {
+  display: flex; flex-direction: column; align-items: center;
+  animation: geo-bob 7s ease-in-out infinite alternate;
+}
+.geo-fig:nth-child(2) { animation-delay: -2s; animation-duration: 8s; }
+.geo-fig:nth-child(3) { animation-delay: -4s; animation-duration: 6.5s; }
+.geo-fig:nth-child(4) { animation-delay: -1s; animation-duration: 7.5s; }
+.geo-fig:nth-child(5) { animation-delay: -3s; animation-duration: 8.5s; }
+@keyframes geo-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(var(--u) * -0.14)); }
+}
+.g { position: relative; }
+.c-violet { --c: var(--violet); }
+.c-lila { --c: var(--violet-soft); }
+.c-acid { --c: var(--acid); }
+.c-ink { --c: var(--text); }
+
+.g-circle { width: calc(var(--u)*1.5); height: calc(var(--u)*1.5); border-radius: 50%; background: var(--c); }
+.g-donut {
+  width: calc(var(--u)*1.5); height: calc(var(--u)*1.5); border-radius: 50%;
+  border: calc(var(--u)*0.42) solid var(--c);
+}
+.g-square { width: calc(var(--u)*1.5); height: calc(var(--u)*1.35); background: var(--c); }
+.g-square-hole { width: calc(var(--u)*1.5); height: calc(var(--u)*1.35); background: var(--c); display: grid; place-items: center; }
+.g-square-hole::after { content: ""; width: calc(var(--u)*0.55); height: calc(var(--u)*0.55); border-radius: 50%; background: var(--paper); }
+.g-arch-hole {
+  width: calc(var(--u)*1.6); height: calc(var(--u)*1.4); background: var(--c);
+  border-radius: calc(var(--u)*0.8) calc(var(--u)*0.8) 0 0;
+  display: grid; place-items: center;
+}
+.g-arch-hole::after { content: ""; width: calc(var(--u)*0.55); height: calc(var(--u)*0.55); border-radius: 50%; background: var(--paper); }
+.g-halfdown { width: calc(var(--u)*1.5); height: calc(var(--u)*0.75); background: var(--c); border-radius: 0 0 calc(var(--u)*0.75) calc(var(--u)*0.75); }
+.g-legs { width: calc(var(--u)*1.5); height: calc(var(--u)*1.3); background: var(--c); position: relative; }
+.g-legs::after {
+  content: ""; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  width: calc(var(--u)*0.5); height: calc(var(--u)*0.8);
+  border-radius: calc(var(--u)*0.25) calc(var(--u)*0.25) 0 0;
+  background: var(--paper);
+}
+.g-x { width: calc(var(--u)*1.5); height: calc(var(--u)*1.3); position: relative; }
+.g-x::before, .g-x::after {
+  content: ""; position: absolute; inset: 0; margin: auto;
+  width: calc(var(--u)*1.7); height: calc(var(--u)*0.46);
+  border-radius: 999px; background: var(--c);
+}
+.g-x::before { transform: rotate(45deg); }
+.g-x::after { transform: rotate(-45deg); }
+/* bracitos */
+.arm-r::before, .arm-l::before {
+  content: ""; position: absolute; top: calc(var(--u)*0.1);
+  width: calc(var(--u)*0.85); height: calc(var(--u)*0.46);
+  background: var(--violet-soft);
+  border-radius: 999px;
+}
+.arm-r::before { left: 100%; border-radius: 0 999px 999px 0; }
+.arm-l::before { right: 100%; border-radius: 999px 0 0 999px; }
+.arm-acid::before { background: var(--acid); }
+
+@media (max-width: 980px) {
+  .geo-track { flex-wrap: wrap; justify-content: center; gap: 2.2rem; --u: clamp(38px, 9vw, 58px); }
+  .geo-fig-5 { display: none; }
+}
+
 /* Sobre mí */
 .about { max-width: 1280px; margin: 0 auto; padding: 3rem 2rem 5rem; }
 .about-card {
@@ -554,6 +626,9 @@ body.modal-open { overflow: hidden; }
   .hero-title { order: 1; }
   .hero-kicker { order: 2; margin: 1.2rem 0 0; }
   .hero-foot { order: 3; margin-top: 1.6rem; }
+  /* tamaño FIJO para la línea que teclea: cabe "MOTION GRAPHICS" completo
+     desde la primera letra — nada de re-encoger por tecla (saltaba) */
+  .hero-title .line.accent.cycling { font-size: clamp(1.2rem, 6.4vw, 2.6rem) !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

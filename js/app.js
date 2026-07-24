@@ -486,7 +486,11 @@ function startTitleCycle(line) {
   // altura fija para que el hero no salte cuando la fuente encoge
   line.style.minHeight = `${line.getBoundingClientRect().height}px`;
 
+  const mobileFixed = matchMedia("(max-width: 620px)");
+
   function fit() {
+    // en móvil el tamaño es FIJO por CSS (clamp por vw): cero reflow por tecla
+    if (mobileFixed.matches) { line.style.fontSize = ""; return; }
     line.style.fontSize = "";
     // margen de seguridad: sin él, el redondeo subpixel recorta la última letra
     const max = line.parentElement.clientWidth - 10;
@@ -630,6 +634,10 @@ function startMotion() {
   gsap.from(".exp-card", {
     scrollTrigger: { trigger: ".expertise-grid", start: "top 82%" },
     opacity: 0, y: 40, duration: 0.7, ease: "power3.out", stagger: 0.1,
+  });
+  gsap.from(".geo-fig", {
+    scrollTrigger: { trigger: ".geo", start: "top 82%" },
+    opacity: 0, y: 60, rotate: -5, duration: 0.8, ease: "back.out(1.7)", stagger: 0.12,
   });
   gsap.from(".about-card", {
     scrollTrigger: { trigger: ".about", start: "top 80%" },
