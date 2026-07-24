@@ -161,15 +161,16 @@ body {
 }
 .hero-title .line.accent { color: var(--violet); }
 .hero-title .char { display: inline-block; will-change: transform; }
-/* ciclo de servicios: la línea no se parte y mantiene su altura al encoger la fuente */
+/* ciclo de servicios: la línea no se parte y mantiene su altura al encoger la
+   fuente. Ancla ARRIBA: la palabra queda pegada a DANIELA y el aire sobra abajo. */
 .hero-title .line.accent.cycling {
   white-space: nowrap;
-  display: flex; align-items: flex-end;
+  display: flex; align-items: flex-start;
 }
 .type-caret {
   display: inline-block; flex: none;
   width: 0.09em; height: 0.78em;
-  margin-left: 0.08em; margin-bottom: 0.06em;
+  margin-left: 0.08em; margin-top: 0.12em;
   background: var(--acid);
   animation: caret-blink 0.85s steps(1) infinite;
 }
