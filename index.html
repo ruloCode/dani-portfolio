@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniela Ramírez O — Diseñadora Gráfica &amp; Motion Designer</title>
+  <meta name="description" content="Portafolio de Daniela Ramírez O — motion graphics, branding, video y social media para marcas como RCN Televisión, Juan Valdez y Peiky. Bogotá, Colombia." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CO" />
+  <meta property="og:site_name" content="Daniela Ramírez O" />
+  <meta property="og:title" content="Daniela Ramírez O — Diseñadora Gráfica &amp; Motion Designer" />
+  <meta property="og:description" content="Motion graphics, branding, video y social media para marcas como RCN Televisión, Juan Valdez y Peiky. Bogotá, Colombia." />
+  <meta property="og:url" content="https://dani-portfolio.vercel.app/" />
+  <meta property="og:image" content="https://dani-portfolio.vercel.app/assets/og/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Daniela Ramírez — diseñadora gráfica y motion designer" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Daniela Ramírez O — Diseñadora Gráfica &amp; Motion Designer" />
+  <meta name="twitter:description" content="Motion graphics, branding, video y social media. Bogotá, Colombia." />
+  <meta name="twitter:image" content="https://dani-portfolio.vercel.app/assets/og/og.jpg" />
+  <link rel="canonical" href="https://dani-portfolio.vercel.app/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Sora:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="topbar-logo" href="#top">DANI<span class="tick">✦</span>RAMÍREZ</a>
+    <div class="topbar-meta mono">
+      <span>Bogotá, CO</span>
+      <span class="dot">●</span>
+      <span id="local-time">--:--</span>
+    </div>
+    <nav class="topbar-nav">
+      <a href="#trabajo" data-hover>Trabajo</a>
+      <a href="#archivo" data-hover>Archivo</a>
+      <a href="#sobre-mi" data-hover>Sobre mí</a>
+      <a href="#contacto" class="topbar-cta" data-hover>Hablemos ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO con fondo 3D -->
+    <section class="hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <p class="hero-kicker mono reveal-hero">✦ Diseñadora gráfica &amp; motion designer</p>
+        <h1 class="hero-title" aria-label="Daniela Ramírez">
+          <span class="line">DANIELA</span>
+          <span class="line accent">RAMÍREZ</span>
+        </h1>
+        <div class="hero-foot">
+          <p class="hero-sub reveal-hero">Marcas que se mueven, videos que cuentan<br />y piezas que no pasan de largo.</p>
+          <ul class="hero-roles mono reveal-hero">
+            <li>Motion Graphics</li>
+            <li>Branding</li>
+            <li>Video</li>
+            <li>Social Media</li>
+          </ul>
+        </div>
+      </div>
+      <a class="hero-scroll mono" href="#clientes" data-hover>Scroll<span class="hero-scroll-line"></span></a>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="clients" id="clientes" aria-label="Clientes">
+      <div class="marquee">
+        <div class="marquee-track">
+          <span>RCN TELEVISIÓN ✦ JUAN VALDEZ ✦ PEIKY ✦ BUENAPEOPLE ✦ BRIC ✦ ABI ✦ I BELIEVE ✦ HAPPY HUEVOS ✦&nbsp;</span>
+          <span aria-hidden="true">RCN TELEVISIÓN ✦ JUAN VALDEZ ✦ PEIKY ✦ BUENAPEOPLE ✦ BRIC ✦ ABI ✦ I BELIEVE ✦ HAPPY HUEVOS ✦&nbsp;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement">
+      <p class="statement-text split-lines">Diseño que no decora:<br />comunica, convierte<br />y se queda en la cabeza.</p>
+      <div class="statement-stats">
+        <div class="stat"><span class="stat-num" data-count="41">0</span><span class="stat-label mono">Proyectos publicados</span></div>
+        <div class="stat"><span class="stat-num" data-count="10">0</span><span class="stat-label mono">Marcas &amp; clientes</span></div>
+        <div class="stat"><span class="stat-num" data-count="6">0</span><span class="stat-label mono">Años de experiencia</span></div>
+      </div>
+    </section>
+
+    <!-- TRABAJO SELECCIONADO -->
+    <section class="work" id="trabajo">
+      <div class="section-head">
+        <h2 class="section-title">Trabajo<br />seleccionado<span class="tick">✦</span></h2>
+        <p class="section-note mono">Casos con marcas reales — motion, branding y campañas</p>
+      </div>
+      <div class="featured" id="featured"></div>
+    </section>
+
+    <!-- ARCHIVO -->
+    <section class="archive" id="archivo">
+      <div class="section-head">
+        <h2 class="section-title">Archivo<span class="tick">✦</span></h2>
+        <div class="filters mono" id="filters" aria-label="Filtrar por disciplina"></div>
+      </div>
+      <div class="index" id="index" role="list"></div>
+      <div class="index-preview" id="index-preview" aria-hidden="true"><img alt="" /></div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section class="expertise">
+      <div class="section-head">
+        <h2 class="section-title">Qué hago<span class="tick">✦</span></h2>
+      </div>
+      <div class="expertise-grid">
+        <article class="exp-card" data-tilt>
+          <span class="exp-num mono">01</span>
+          <h3>Motion Graphics &amp; Animación</h3>
+          <p>Animación 2D, elementos animados y piezas para TV y digital. Promos emitidas en televisión nacional.</p>
+        </article>
+        <article class="exp-card" data-tilt>
+          <span class="exp-num mono">02</span>
+          <h3>Branding &amp; Identidad</h3>
+          <p>Logos, manuales de marca y sistemas visuales completos — de la papelería al key visual.</p>
+        </article>
+        <article class="exp-card" data-tilt>
+          <span class="exp-num mono">03</span>
+          <h3>Social Media &amp; Campañas</h3>
+          <p>Contenido que rinde en feed: parrillas, campañas y media kits con estrategia detrás.</p>
+        </article>
+        <article class="exp-card" data-tilt>
+          <span class="exp-num mono">04</span>
+          <h3>Video &amp; Edición</h3>
+          <p>Grabación, edición y post — de programas de TV a publicidad para apps.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section class="about" id="sobre-mi">
+      <div class="about-card" data-tilt>
+        <img class="about-avatar" id="avatar" src="assets/profile/avatar.jpg" alt="Retrato de Daniela Ramírez" />
+        <div class="about-text">
+          <h2 class="section-title">Sobre mí<span class="tick">✦</span></h2>
+          <p>Técnica profesional en producción gráfica con base en Bogotá. Edición y retoque digital,
+            diagramación, ilustración, edición de video, diseño UI y desarrollo web en WordPress.
+            Apasionada por la fotografía y por los conceptos audiovisuales que conectan marcas con personas.</p>
+          <div class="about-links mono" id="social-links"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact" id="contacto">
+      <p class="contact-kicker mono">¿Tienes un proyecto?</p>
+      <a class="contact-title" href="https://www.behance.net/dannyromo615c" target="_blank" rel="noopener" data-hover>
+        <span>TRABAJEMOS</span>
+        <span class="accent">JUNTOS ↗</span>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer mono">
+    <span>© <span id="year"></span> Daniela Ramírez O</span>
+    <span id="footer-count">— proyectos · Behance</span>
+    <span>Hecho con ✦ en Bogotá</span>
+  </footer>
+
+  <!-- MODAL DE PROYECTO -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" data-lenis-prevent>
+      <button class="modal-close mono" data-close aria-label="Cerrar">ESC ✕</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
+  <script type="module" src="js/hero3d.js"></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

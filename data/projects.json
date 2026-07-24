@@ -1,0 +1,1235 @@
+{
+  "profile": {
+    "avatar": "assets/profile/avatar.jpg",
+    "banner": "assets/profile/banner.jpg",
+    "social": [
+      "http://linkedin.com/in/daniela-ram%C3%ADrez-onofre-759557158/",
+      "http://instagram.com/daniramirez.o44",
+      "http://instagram.com/behance",
+      "https://www.linkedin.com/company/151575"
+    ]
+  },
+  "projects": [
+    {
+      "id": "95724549",
+      "slug": "my-cv",
+      "title": "MY CV",
+      "description": "",
+      "tags": [
+        "curriculum",
+        "CV",
+        "graphic design",
+        "ILLUSTRATION",
+        "personal branding",
+        "portfolio",
+        "Resume",
+        "self branding"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/95724549/MY-CV",
+      "images": [
+        "assets/projects/95724549-my-cv/00.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "231905159",
+      "slug": "animation-for-abi",
+      "title": "Animation for ABI",
+      "description": "",
+      "tags": [
+        "design",
+        "animation",
+        "animation 2d",
+        "motion graphics",
+        "after effects",
+        "Video Editing"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación",
+        "Gráficos animados"
+      ],
+      "url": "https://www.behance.net/gallery/231905159/Animation-for-ABI",
+      "images": [
+        "assets/projects/231905159-animation-for-abi/00.png"
+      ],
+      "videos": [
+        "assets/projects/231905159-animation-for-abi/video-00.mp4",
+        "assets/projects/231905159-animation-for-abi/video-01.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "121079243",
+      "slug": "social-media-bric",
+      "title": "Social Media Bric",
+      "description": "",
+      "tags": [
+        "creativo",
+        "facebook",
+        "instagram",
+        "media",
+        "post",
+        "redes",
+        "redes sociales",
+        "reels",
+        "Socialmedia",
+        "Stories"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/121079243/Social-Media-Bric",
+      "images": [
+        "assets/projects/121079243-social-media-bric/00.png",
+        "assets/projects/121079243-social-media-bric/01.gif"
+      ],
+      "videos": [],
+      "embeds": [
+        "https://www.youtube.com/embed/smEZx4THXDU",
+        "https://www.youtube.com/embed/oaha9WGKpsY",
+        "https://www.youtube.com/embed/V6E4vqbdNy0",
+        "https://www.youtube.com/embed/UIvuWkEs-c8"
+      ]
+    },
+    {
+      "id": "225523757",
+      "slug": "brand-visual-identity",
+      "title": "Brand Visual Identity",
+      "description": "",
+      "tags": [
+        "Branding design",
+        "visual identity"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/225523757/Brand-Visual-Identity",
+      "images": [
+        "assets/projects/225523757-brand-visual-identity/00.png",
+        "assets/projects/225523757-brand-visual-identity/01.png",
+        "assets/projects/225523757-brand-visual-identity/02.png",
+        "assets/projects/225523757-brand-visual-identity/03.png",
+        "assets/projects/225523757-brand-visual-identity/04.png"
+      ],
+      "videos": [
+        "assets/projects/225523757-brand-visual-identity/video-00.mp4",
+        "assets/projects/225523757-brand-visual-identity/video-01.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "123509573",
+      "slug": "social-media",
+      "title": "Social Media",
+      "description": "",
+      "tags": [
+        "creativo",
+        "instagram",
+        "media",
+        "post",
+        "redes",
+        "redessociales",
+        "reels",
+        "Socialmedia"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/123509573/Social-Media",
+      "images": [
+        "assets/projects/123509573-social-media/00.png",
+        "assets/projects/123509573-social-media/01.png"
+      ],
+      "videos": [],
+      "embeds": [
+        "https://www.youtube.com/embed/XLVPIq6bm4s",
+        "https://www.youtube.com/embed/QVNUHgRbVs4",
+        "https://www.youtube.com/embed/5d9wTQSLG-g",
+        "https://www.youtube.com/embed/PPqSGmPt03Y",
+        "https://www.youtube.com/embed/-8S5D0KCzMM",
+        "https://www.youtube.com/embed/UtlOBDIVmE4"
+      ]
+    },
+    {
+      "id": "172177563",
+      "slug": "logo-inmobiliaria-profesional",
+      "title": "Logo Inmobiliaria Profesional",
+      "description": "",
+      "tags": [
+        "logo",
+        "design",
+        "visual identity",
+        "Logo Design",
+        "Logotype",
+        "motion design"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación GIF"
+      ],
+      "url": "https://www.behance.net/gallery/172177563/Logo-Inmobiliaria-Profesional",
+      "images": [
+        "assets/projects/172177563-logo-inmobiliaria-profesional/00.gif",
+        "assets/projects/172177563-logo-inmobiliaria-profesional/01.png",
+        "assets/projects/172177563-logo-inmobiliaria-profesional/02.jpg",
+        "assets/projects/172177563-logo-inmobiliaria-profesional/03.png",
+        "assets/projects/172177563-logo-inmobiliaria-profesional/04.png",
+        "assets/projects/172177563-logo-inmobiliaria-profesional/05.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "128364247",
+      "slug": "video-recording-and-editing",
+      "title": "Video Recording and Editing",
+      "description": "",
+      "tags": [
+        "audiovisual",
+        "camara",
+        "Edición de Video",
+        "Premiere Pro",
+        "Producción",
+        "producción audiovisual",
+        "video",
+        "Video Editing",
+        "videography",
+        "videos"
+      ],
+      "fields": [
+        "Fotografía"
+      ],
+      "url": "https://www.behance.net/gallery/128364247/Video-Recording-and-Editing",
+      "images": [
+        "assets/projects/128364247-video-recording-and-editing/00.png"
+      ],
+      "videos": [
+        "assets/projects/128364247-video-recording-and-editing/video-00.mp4",
+        "assets/projects/128364247-video-recording-and-editing/video-01.mp4"
+      ],
+      "embeds": [
+        "https://www.youtube.com/embed/Xc4m_QvzTOQ",
+        "https://www.youtube.com/embed/pP-AgcNts6s",
+        "https://www.youtube.com/embed/ooVeSRJx1FY",
+        "https://www.youtube.com/embed/xeREAhGSEH0",
+        "https://www.youtube.com/embed/qk8tB-dU9kc"
+      ]
+    },
+    {
+      "id": "212246521",
+      "slug": "video-editing-motion-graphics",
+      "title": "Video Editing /Motion Graphics",
+      "description": "",
+      "tags": [
+        "premiere",
+        "after effects"
+      ],
+      "fields": [
+        "Moda",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/212246521/Video-Editing-Motion-Graphics",
+      "images": [
+        "assets/projects/212246521-video-editing-motion-graphics/00.png"
+      ],
+      "videos": [
+        "assets/projects/212246521-video-editing-motion-graphics/video-00.mp4",
+        "assets/projects/212246521-video-editing-motion-graphics/video-01.mp4",
+        "assets/projects/212246521-video-editing-motion-graphics/video-02.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "121097105",
+      "slug": "one-page-website",
+      "title": "One Page Website",
+      "description": "",
+      "tags": [
+        "creativo",
+        "desarrollodepagina",
+        "developer wordpress",
+        "diseño",
+        "onepage",
+        "UI",
+        "ux",
+        "Web",
+        "Website"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Diseño web",
+        "Interfaz y exp. de usuario"
+      ],
+      "url": "https://www.behance.net/gallery/121097105/One-Page-Website",
+      "images": [
+        "assets/projects/121097105-one-page-website/00.jpg",
+        "assets/projects/121097105-one-page-website/01.jpg",
+        "assets/projects/121097105-one-page-website/02.jpg",
+        "assets/projects/121097105-one-page-website/03.jpg",
+        "assets/projects/121097105-one-page-website/04.jpg",
+        "assets/projects/121097105-one-page-website/05.jpg",
+        "assets/projects/121097105-one-page-website/06.jpg"
+      ],
+      "videos": [
+        "assets/projects/121097105-one-page-website/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "212250711",
+      "slug": "key-visual-desing-for-page-web",
+      "title": "Key Visual Desing for Page Web",
+      "description": "",
+      "tags": [],
+      "fields": [
+        "Diseño web"
+      ],
+      "url": "https://www.behance.net/gallery/212250711/Key-Visual-Desing-for-Page-Web",
+      "images": [
+        "assets/projects/212250711-key-visual-desing-for-page-web/00.png"
+      ],
+      "videos": [
+        "assets/projects/212250711-key-visual-desing-for-page-web/video-00.mp4",
+        "assets/projects/212250711-key-visual-desing-for-page-web/video-01.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "196350285",
+      "slug": "motion-graphics",
+      "title": "Motion Graphics",
+      "description": "",
+      "tags": [
+        "motion graphics",
+        "after effects",
+        "Illustrator",
+        "animation",
+        "animacion",
+        "animacion 2d"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/196350285/Motion-Graphics",
+      "images": [
+        "assets/projects/196350285-motion-graphics/00.png"
+      ],
+      "videos": [
+        "assets/projects/196350285-motion-graphics/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "121093139",
+      "slug": "assets-for-play-store",
+      "title": "Assets for Play Store",
+      "description": "",
+      "tags": [
+        "ads",
+        "aplicaciones",
+        "app",
+        "bannerads",
+        "banners",
+        "creativo",
+        "diseño",
+        "publicicdad",
+        "Startup",
+        "баннер"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/121093139/Assets-for-Play-Store",
+      "images": [
+        "assets/projects/121093139-assets-for-play-store/00.png",
+        "assets/projects/121093139-assets-for-play-store/01.png",
+        "assets/projects/121093139-assets-for-play-store/02.png",
+        "assets/projects/121093139-assets-for-play-store/03.png",
+        "assets/projects/121093139-assets-for-play-store/04.png",
+        "assets/projects/121093139-assets-for-play-store/05.png",
+        "assets/projects/121093139-assets-for-play-store/06.png",
+        "assets/projects/121093139-assets-for-play-store/07.png",
+        "assets/projects/121093139-assets-for-play-store/08.png",
+        "assets/projects/121093139-assets-for-play-store/09.png",
+        "assets/projects/121093139-assets-for-play-store/10.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "172102249",
+      "slug": "campaign-design",
+      "title": "Campaign Design",
+      "description": "",
+      "tags": [
+        "Montaje",
+        "diseño gráfico",
+        "Redes Sociais",
+        "post",
+        "social media",
+        "retoque digital",
+        "gif"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/172102249/Campaign-Design",
+      "images": [
+        "assets/projects/172102249-campaign-design/00.gif",
+        "assets/projects/172102249-campaign-design/01.gif",
+        "assets/projects/172102249-campaign-design/02.png",
+        "assets/projects/172102249-campaign-design/03.jpg",
+        "assets/projects/172102249-campaign-design/04.jpg",
+        "assets/projects/172102249-campaign-design/05.jpg",
+        "assets/projects/172102249-campaign-design/06.jpg",
+        "assets/projects/172102249-campaign-design/07.jpg",
+        "assets/projects/172102249-campaign-design/08.jpg",
+        "assets/projects/172102249-campaign-design/09.jpg",
+        "assets/projects/172102249-campaign-design/10.jpg",
+        "assets/projects/172102249-campaign-design/11.jpg",
+        "assets/projects/172102249-campaign-design/12.jpg",
+        "assets/projects/172102249-campaign-design/13.jpg",
+        "assets/projects/172102249-campaign-design/14.jpg",
+        "assets/projects/172102249-campaign-design/15.jpg",
+        "assets/projects/172102249-campaign-design/16.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "161324121",
+      "slug": "video-editing",
+      "title": "Video Editing",
+      "description": "",
+      "tags": [
+        "affter effects",
+        "Premiere Pro",
+        "video",
+        "videoediting",
+        "videos"
+      ],
+      "fields": [
+        "Edición",
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/161324121/Video-Editing",
+      "images": [
+        "assets/projects/161324121-video-editing/00.jpg"
+      ],
+      "videos": [
+        "assets/projects/161324121-video-editing/video-00.mp4",
+        "assets/projects/161324121-video-editing/video-01.mp4",
+        "assets/projects/161324121-video-editing/video-02.mp4",
+        "assets/projects/161324121-video-editing/video-03.mp4",
+        "assets/projects/161324121-video-editing/video-04.mp4",
+        "assets/projects/161324121-video-editing/video-05.mp4",
+        "assets/projects/161324121-video-editing/video-06.mp4",
+        "assets/projects/161324121-video-editing/video-07.mp4",
+        "assets/projects/161324121-video-editing/video-08.mp4",
+        "assets/projects/161324121-video-editing/video-09.mp4"
+      ],
+      "embeds": [
+        "https://www.youtube.com/embed/RfdwW9ZEqao"
+      ]
+    },
+    {
+      "id": "83224139",
+      "slug": "promo-for-rcn-television",
+      "title": "Promo for RCN Television",
+      "description": "",
+      "tags": [
+        "animation",
+        "animacion",
+        "edición",
+        "diseño",
+        "adobe",
+        "ilustrator",
+        "aftereffects",
+        "graphic",
+        "desing",
+        "diseñografico"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación",
+        "Edición"
+      ],
+      "url": "https://www.behance.net/gallery/83224139/Promo-for-RCN-Television",
+      "images": [
+        "assets/projects/83224139-promo-for-rcn-television/00.png"
+      ],
+      "videos": [
+        "assets/projects/83224139-promo-for-rcn-television/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "196347529",
+      "slug": "motion-graphics-insights-y-arquetipos",
+      "title": "Motion Graphics Insights y Arquetipos",
+      "description": "",
+      "tags": [
+        "animations",
+        "motion graphics",
+        "animacion",
+        "after effects",
+        "photoshop"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/196347529/Motion-Graphics-Insights-y-Arquetipos",
+      "images": [
+        "assets/projects/196347529-motion-graphics-insights-y-arquetipos/00.png"
+      ],
+      "videos": [
+        "assets/projects/196347529-motion-graphics-insights-y-arquetipos/video-00.mp4",
+        "assets/projects/196347529-motion-graphics-insights-y-arquetipos/video-01.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "212247141",
+      "slug": "animation",
+      "title": "Animation",
+      "description": "",
+      "tags": [],
+      "fields": [
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/212247141/Animation",
+      "images": [
+        "assets/projects/212247141-animation/00.png"
+      ],
+      "videos": [
+        "assets/projects/212247141-animation/video-00.mp4",
+        "assets/projects/212247141-animation/video-01.mp4",
+        "assets/projects/212247141-animation/video-02.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "97797783",
+      "slug": "media-kit-buenapeople",
+      "title": "MEDIA-KIT-BUENAPEOPLE",
+      "description": "",
+      "tags": [
+        "desing",
+        "diseño gráfico",
+        "e-mail marketing",
+        "marketing",
+        "Media Kit",
+        "post",
+        "redes sociales",
+        "social media",
+        "Diseño UI",
+        "diseño ux"
+      ],
+      "fields": [
+        "Animación",
+        "Diseño gráfico",
+        "Diseño web"
+      ],
+      "url": "https://www.behance.net/gallery/97797783/MEDIA-KIT-BUENAPEOPLE",
+      "images": [
+        "assets/projects/97797783-media-kit-buenapeople/00.png",
+        "assets/projects/97797783-media-kit-buenapeople/01.gif",
+        "assets/projects/97797783-media-kit-buenapeople/02.gif",
+        "assets/projects/97797783-media-kit-buenapeople/03.png",
+        "assets/projects/97797783-media-kit-buenapeople/04.gif",
+        "assets/projects/97797783-media-kit-buenapeople/05.png",
+        "assets/projects/97797783-media-kit-buenapeople/06.png"
+      ],
+      "videos": [
+        "assets/projects/97797783-media-kit-buenapeople/video-00.mp4",
+        "assets/projects/97797783-media-kit-buenapeople/video-01.mp4",
+        "assets/projects/97797783-media-kit-buenapeople/video-02.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "196349955",
+      "slug": "animated-elements",
+      "title": "Animated elements",
+      "description": "",
+      "tags": [
+        "photoshop",
+        "animation",
+        "animacion 2d",
+        "animacion",
+        "after effects",
+        "motion graphics"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/196349955/Animated-elements",
+      "images": [
+        "assets/projects/196349955-animated-elements/00.gif",
+        "assets/projects/196349955-animated-elements/01.gif",
+        "assets/projects/196349955-animated-elements/02.gif",
+        "assets/projects/196349955-animated-elements/03.gif"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "196347905",
+      "slug": "motion-graphics",
+      "title": "Motion Graphics",
+      "description": "",
+      "tags": [
+        "after effects",
+        "photoshop",
+        "animation",
+        "animation 2d",
+        "motion graphics",
+        "phgotoshop"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/196347905/Motion-Graphics",
+      "images": [
+        "assets/projects/196347905-motion-graphics/00.gif",
+        "assets/projects/196347905-motion-graphics/01.gif"
+      ],
+      "videos": [
+        "assets/projects/196347905-motion-graphics/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "212248419",
+      "slug": "page-on-wordpress",
+      "title": "Page on Wordpress",
+      "description": "",
+      "tags": [],
+      "fields": [
+        "Diseño web"
+      ],
+      "url": "https://www.behance.net/gallery/212248419/Page-on-Wordpress",
+      "images": [
+        "assets/projects/212248419-page-on-wordpress/00.png"
+      ],
+      "videos": [
+        "assets/projects/212248419-page-on-wordpress/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "83377419",
+      "slug": "video-animation-to-promote-the-app-buenapeople",
+      "title": "Video animation to promote the app - buenaPeople",
+      "description": "",
+      "tags": [
+        "aftereffects",
+        "adobe",
+        "photoshop",
+        "diseño",
+        "app",
+        "diseñografico",
+        "animacion",
+        "animation"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/83377419/Video-animation-to-promote-the-app-buenaPeople",
+      "images": [
+        "assets/projects/83377419-video-animation-to-promote-the-app-buenapeople/00.png"
+      ],
+      "videos": [
+        "assets/projects/83377419-video-animation-to-promote-the-app-buenapeople/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "121092891",
+      "slug": "landing-page-bric",
+      "title": "Landing Page Bric",
+      "description": "",
+      "tags": [
+        "creativo",
+        "diseño",
+        "DisenoUi",
+        "diseñoux",
+        "landing",
+        "page",
+        "pagina",
+        "paginaweb",
+        "Web",
+        "Website"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Diseño web",
+        "Interfaz y exp. de usuario"
+      ],
+      "url": "https://www.behance.net/gallery/121092891/Landing-Page-Bric",
+      "images": [
+        "assets/projects/121092891-landing-page-bric/00.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "172104509",
+      "slug": "logo-and-desing-class-limitless",
+      "title": "Logo and Desing Class Limitless",
+      "description": "",
+      "tags": [
+        "Poster Design",
+        "Social media post",
+        "social media",
+        "instagram"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/172104509/Logo-and-Desing-Class-Limitless",
+      "images": [
+        "assets/projects/172104509-logo-and-desing-class-limitless/00.png",
+        "assets/projects/172104509-logo-and-desing-class-limitless/01.jpg",
+        "assets/projects/172104509-logo-and-desing-class-limitless/02.jpg",
+        "assets/projects/172104509-logo-and-desing-class-limitless/03.jpg",
+        "assets/projects/172104509-logo-and-desing-class-limitless/04.jpg",
+        "assets/projects/172104509-logo-and-desing-class-limitless/05.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "171523611",
+      "slug": "logo-happy-huevos",
+      "title": "Logo Happy Huevos",
+      "description": "",
+      "tags": [
+        "logo",
+        "design",
+        "logos design",
+        "brand identity",
+        "Logo Design",
+        "Logotype"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/171523611/Logo-Happy-Huevos",
+      "images": [
+        "assets/projects/171523611-logo-happy-huevos/00.png",
+        "assets/projects/171523611-logo-happy-huevos/01.png",
+        "assets/projects/171523611-logo-happy-huevos/02.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "146697739",
+      "slug": "video-editing-for-advertising",
+      "title": "Video editing for advertising",
+      "description": "",
+      "tags": [
+        "after effects",
+        "animation",
+        "diseño",
+        "motion graphics",
+        "Premiere Pro",
+        "video",
+        "Video Editing"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/146697739/Video-editing-for-advertising",
+      "images": [
+        "assets/projects/146697739-video-editing-for-advertising/00.png"
+      ],
+      "videos": [
+        "assets/projects/146697739-video-editing-for-advertising/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "172103879",
+      "slug": "logo-rg-abogadas",
+      "title": "Logo RG & ABOGADAS",
+      "description": "",
+      "tags": [
+        "logo",
+        "Logo Design",
+        "design",
+        "brand identity",
+        "adobe illustrator"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/172103879/Logo-RG-ABOGADAS",
+      "images": [
+        "assets/projects/172103879-logo-rg-abogadas/00.png",
+        "assets/projects/172103879-logo-rg-abogadas/01.png",
+        "assets/projects/172103879-logo-rg-abogadas/02.png",
+        "assets/projects/172103879-logo-rg-abogadas/03.png",
+        "assets/projects/172103879-logo-rg-abogadas/04.png",
+        "assets/projects/172103879-logo-rg-abogadas/05.png",
+        "assets/projects/172103879-logo-rg-abogadas/06.png",
+        "assets/projects/172103879-logo-rg-abogadas/07.png",
+        "assets/projects/172103879-logo-rg-abogadas/08.png",
+        "assets/projects/172103879-logo-rg-abogadas/09.png",
+        "assets/projects/172103879-logo-rg-abogadas/10.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "83293863",
+      "slug": "video-editing-for-trendiando-television-program",
+      "title": "Video editing for Trendiando, television program.",
+      "description": "",
+      "tags": [
+        "animation",
+        "edition",
+        "edición",
+        "video",
+        "vid",
+        "premiere",
+        "dobe",
+        "PremeierePRO",
+        "notas"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación",
+        "Edición"
+      ],
+      "url": "https://www.behance.net/gallery/83293863/Video-editing-for-Trendiando-television-program",
+      "images": [
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/00.png"
+      ],
+      "videos": [
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-00.mp4",
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-01.mp4",
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-02.mp4",
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-03.mp4",
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-04.mp4",
+        "assets/projects/83293863-video-editing-for-trendiando-television-program/video-05.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "85726427",
+      "slug": "advertising-for-peiky-app",
+      "title": "Advertising for Peiky App",
+      "description": "",
+      "tags": [
+        "ads",
+        "Pieza",
+        "publicidad",
+        "app",
+        "aplicación",
+        "afiche",
+        "diseñografico",
+        "diseño",
+        "grapich",
+        "graphic design"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/85726427/Advertising-for-Peiky-App",
+      "images": [
+        "assets/projects/85726427-advertising-for-peiky-app/00.png",
+        "assets/projects/85726427-advertising-for-peiky-app/01.png",
+        "assets/projects/85726427-advertising-for-peiky-app/02.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "84808639",
+      "slug": "infographic-for-juan-valdez",
+      "title": "Infographic for Juan Valdez",
+      "description": "",
+      "tags": [
+        "infografia",
+        "infographic",
+        "ilustrator",
+        "photoshop",
+        "desing",
+        "graphic design",
+        "vector",
+        "vectorización",
+        "cafe",
+        "coffe"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Diseño web",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/84808639/Infographic-for-Juan-Valdez",
+      "images": [
+        "assets/projects/84808639-infographic-for-juan-valdez/00.png",
+        "assets/projects/84808639-infographic-for-juan-valdez/01.jpg",
+        "assets/projects/84808639-infographic-for-juan-valdez/02.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "83238151",
+      "slug": "logo-and-animation-for-program",
+      "title": "Logo and animation for program",
+      "description": "",
+      "tags": [
+        "aftereffects",
+        "adobe",
+        "diseñografico",
+        "grafico",
+        "animacion",
+        "animation",
+        "graphicdesing",
+        "desing",
+        "ilustrator",
+        "photoshop"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Animación",
+        "Retoques"
+      ],
+      "url": "https://www.behance.net/gallery/83238151/Logo-and-animation-for-program",
+      "images": [
+        "assets/projects/83238151-logo-and-animation-for-program/00.png"
+      ],
+      "videos": [
+        "assets/projects/83238151-logo-and-animation-for-program/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "121088785",
+      "slug": "brand-manual-i-believe",
+      "title": "Brand Manual I believe",
+      "description": "",
+      "tags": [
+        "brand manual",
+        "identidad",
+        "manual",
+        "Manual de Identidad",
+        "manualdemarca",
+        "marca"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Moda",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/121088785/Brand-Manual-I-believe",
+      "images": [
+        "assets/projects/121088785-brand-manual-i-believe/00.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/01.png",
+        "assets/projects/121088785-brand-manual-i-believe/02.png",
+        "assets/projects/121088785-brand-manual-i-believe/03.png",
+        "assets/projects/121088785-brand-manual-i-believe/04.png",
+        "assets/projects/121088785-brand-manual-i-believe/05.png",
+        "assets/projects/121088785-brand-manual-i-believe/06.png",
+        "assets/projects/121088785-brand-manual-i-believe/07.png",
+        "assets/projects/121088785-brand-manual-i-believe/08.png",
+        "assets/projects/121088785-brand-manual-i-believe/09.png",
+        "assets/projects/121088785-brand-manual-i-believe/10.png",
+        "assets/projects/121088785-brand-manual-i-believe/11.png",
+        "assets/projects/121088785-brand-manual-i-believe/12.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/13.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/14.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/15.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/16.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/17.jpg",
+        "assets/projects/121088785-brand-manual-i-believe/18.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "121094315",
+      "slug": "social-media-post-desing",
+      "title": "Social Media Post Desing",
+      "description": "",
+      "tags": [
+        "facebook",
+        "instagram",
+        "post",
+        "redes",
+        "redes sociales",
+        "social",
+        "Socialmedia"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad"
+      ],
+      "url": "https://www.behance.net/gallery/121094315/Social-Media-Post-Desing",
+      "images": [
+        "assets/projects/121094315-social-media-post-desing/00.png",
+        "assets/projects/121094315-social-media-post-desing/01.png",
+        "assets/projects/121094315-social-media-post-desing/02.png",
+        "assets/projects/121094315-social-media-post-desing/03.png",
+        "assets/projects/121094315-social-media-post-desing/04.png",
+        "assets/projects/121094315-social-media-post-desing/05.png",
+        "assets/projects/121094315-social-media-post-desing/06.png",
+        "assets/projects/121094315-social-media-post-desing/07.png",
+        "assets/projects/121094315-social-media-post-desing/08.png",
+        "assets/projects/121094315-social-media-post-desing/09.png",
+        "assets/projects/121094315-social-media-post-desing/10.png",
+        "assets/projects/121094315-social-media-post-desing/11.png",
+        "assets/projects/121094315-social-media-post-desing/12.png",
+        "assets/projects/121094315-social-media-post-desing/13.png",
+        "assets/projects/121094315-social-media-post-desing/14.png",
+        "assets/projects/121094315-social-media-post-desing/15.png",
+        "assets/projects/121094315-social-media-post-desing/16.png",
+        "assets/projects/121094315-social-media-post-desing/17.png",
+        "assets/projects/121094315-social-media-post-desing/18.png",
+        "assets/projects/121094315-social-media-post-desing/19.png",
+        "assets/projects/121094315-social-media-post-desing/20.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "97278719",
+      "slug": "ilustration-and-animation",
+      "title": "Ilustration and animation",
+      "description": "",
+      "tags": [],
+      "fields": [
+        "Animación",
+        "Ilustración",
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/97278719/Ilustration-and-animation",
+      "images": [
+        "assets/projects/97278719-ilustration-and-animation/00.jpg",
+        "assets/projects/97278719-ilustration-and-animation/01.png"
+      ],
+      "videos": [
+        "assets/projects/97278719-ilustration-and-animation/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "172101019",
+      "slug": "juan-pablo-barber",
+      "title": "Juan Pablo Barber",
+      "description": "",
+      "tags": [
+        "logo",
+        "barber",
+        "design"
+      ],
+      "fields": [
+        "Diseño gráfico"
+      ],
+      "url": "https://www.behance.net/gallery/172101019/Juan-Pablo-Barber",
+      "images": [
+        "assets/projects/172101019-juan-pablo-barber/00.png",
+        "assets/projects/172101019-juan-pablo-barber/01.png",
+        "assets/projects/172101019-juan-pablo-barber/02.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "82689601",
+      "slug": "surrealist-advertising-strategy-organ-donation",
+      "title": "Surrealist Advertising Strategy - Organ Donation",
+      "description": "",
+      "tags": [
+        "Fotomontaje",
+        "surrealismo",
+        "donaciondeorganos",
+        "photoshop",
+        "tendencia",
+        "colombia",
+        "trabajo",
+        "Montaje",
+        "edición"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad",
+        "Arte digital"
+      ],
+      "url": "https://www.behance.net/gallery/82689601/Surrealist-Advertising-Strategy-Organ-Donation",
+      "images": [
+        "assets/projects/82689601-surrealist-advertising-strategy-organ-donation/00.png",
+        "assets/projects/82689601-surrealist-advertising-strategy-organ-donation/01.png",
+        "assets/projects/82689601-surrealist-advertising-strategy-organ-donation/02.png",
+        "assets/projects/82689601-surrealist-advertising-strategy-organ-donation/03.png",
+        "assets/projects/82689601-surrealist-advertising-strategy-organ-donation/04.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "83375803",
+      "slug": "diseno-ui",
+      "title": "Diseño UI",
+      "description": "",
+      "tags": [
+        "diseño",
+        "UI",
+        "ux",
+        "interfaz",
+        "Usuario",
+        "app",
+        "grafico",
+        "diseñografico",
+        "adobe",
+        "ilustrator"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Interfaz y exp. de usuario",
+        "Diseño web"
+      ],
+      "url": "https://www.behance.net/gallery/83375803/Diseno-UI",
+      "images": [
+        "assets/projects/83375803-diseno-ui/00.png"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "83620107",
+      "slug": "flyer-design",
+      "title": "Flyer design",
+      "description": "",
+      "tags": [
+        "diseño",
+        "volante",
+        "editorial",
+        "photoshop",
+        "ilustrator",
+        "adobe",
+        "grafico",
+        "imagen",
+        "graphic",
+        "desing"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Diseño editorial",
+        "Retoques"
+      ],
+      "url": "https://www.behance.net/gallery/83620107/Flyer-design",
+      "images": [
+        "assets/projects/83620107-flyer-design/00.png",
+        "assets/projects/83620107-flyer-design/01.png",
+        "assets/projects/83620107-flyer-design/02.jpg",
+        "assets/projects/83620107-flyer-design/03.jpg",
+        "assets/projects/83620107-flyer-design/04.jpg",
+        "assets/projects/83620107-flyer-design/05.jpg",
+        "assets/projects/83620107-flyer-design/06.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "71091987",
+      "slug": "isotype-retouching",
+      "title": "Isotype Retouching",
+      "description": "",
+      "tags": [],
+      "fields": [
+        "Diseño gráfico",
+        "Retoques"
+      ],
+      "url": "https://www.behance.net/gallery/71091987/Isotype-Retouching",
+      "images": [
+        "assets/projects/71091987-isotype-retouching/00.png",
+        "assets/projects/71091987-isotype-retouching/01.jpg"
+      ],
+      "videos": [],
+      "embeds": []
+    },
+    {
+      "id": "82991077",
+      "slug": "animation-for-rcn-television",
+      "title": "Animation for RCN television",
+      "description": "",
+      "tags": [
+        "animacion",
+        "after effects",
+        "ilustrator",
+        "madre",
+        "momo",
+        "animation",
+        "video",
+        "промо"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Publicidad",
+        "Animación"
+      ],
+      "url": "https://www.behance.net/gallery/82991077/Animation-for-RCN-television",
+      "images": [
+        "assets/projects/82991077-animation-for-rcn-television/00.jpg"
+      ],
+      "videos": [
+        "assets/projects/82991077-animation-for-rcn-television/video-00.mp4"
+      ],
+      "embeds": []
+    },
+    {
+      "id": "82924707",
+      "slug": "vector-illustration",
+      "title": "Vector Illustration",
+      "description": "",
+      "tags": [
+        "vectorización",
+        "ilustracion",
+        "Vectorization",
+        "ilustrator",
+        "adobe",
+        "animado",
+        "motorcycle",
+        "anciana",
+        "oldwoman",
+        "hp"
+      ],
+      "fields": [
+        "Diseño gráfico",
+        "Ilustración",
+        "Arte digital"
+      ],
+      "url": "https://www.behance.net/gallery/82924707/Vector-Illustration",
+      "images": [
+        "assets/projects/82924707-vector-illustration/00.jpg",
+        "assets/projects/82924707-vector-illustration/01.jpg"
+      ],
+      "videos": [
+        "assets/projects/82924707-vector-illustration/video-00.mp4",
+        "assets/projects/82924707-vector-illustration/video-01.mp4"
+      ],
+      "embeds": []
+    }
+  ]
+}
