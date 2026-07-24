@@ -547,6 +547,11 @@ body.modal-open { overflow: hidden; }
     width: 100%; justify-content: center; text-align: center; gap: 2rem;
   }
   .stat { align-items: center; }
+  /* el kicker baja bajo el nombre: ahí el velo es sólido y contrasta bien */
+  .hero-inner { display: flex; flex-direction: column; }
+  .hero-title { order: 1; }
+  .hero-kicker { order: 2; margin: 1.2rem 0 0; }
+  .hero-foot { order: 3; margin-top: 1.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

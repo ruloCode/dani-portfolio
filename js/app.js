@@ -537,13 +537,15 @@ function startMotion() {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Camino estático: sin GSAP, sin ScrollTrigger o con reduced-motion —
-  // todo visible, contadores con su valor final y cero animaciones.
+  // todo visible y contadores con su valor final. El typewriter SÍ corre
+  // (es contenido, no decoración: muestra los servicios; JS puro sin GSAP).
   if (!window.gsap || !window.ScrollTrigger || reduced) {
     document.documentElement.classList.add("gsap-done");
     title.classList.add("ready");
     document.querySelectorAll(".stat-num").forEach((el) => {
       el.textContent = el.dataset.count;
     });
+    setTimeout(() => startTitleCycle(title.querySelector(".line.accent")), 3000);
     return;
   }
   gsap.registerPlugin(ScrollTrigger);

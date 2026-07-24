@@ -143,11 +143,15 @@ function tick() {
   requestAnimationFrame(tick);
   if (!inView || !tabVisible) return;
   const t = clock.getElapsedTime();
-  uniforms.uTime.value = prefersReduced ? 0 : t;
+  // La onda SIEMPRE avanza — es la identidad del sitio. Con reduced-motion
+  // (que muchos Android activan solos con ahorro de batería) solo se ralentiza.
+  // En táctiles corre un poco más rápida para que se sienta viva sin mouse.
+  const speed = (prefersReduced ? 0.45 : 1) * (finePointer ? 1 : 1.25);
+  uniforms.uTime.value = t * speed;
   // deriva autónoma en táctiles: cresta paseando en Lissajous + parallax vivo
-  if (!finePointer && !prefersReduced) {
-    target.x = Math.sin(t * 0.3) * 0.6;
-    target.y = Math.sin(t * 0.19 + 1.6) * 0.5;
+  if (!finePointer) {
+    target.x = Math.sin(t * 0.34) * 0.7;
+    target.y = Math.sin(t * 0.21 + 1.6) * 0.55;
   }
   uniforms.uMouse.value.lerp(target, 0.06);
   camera.position.x += (target.x * 0.7 - camera.position.x) * 0.03;
