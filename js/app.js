@@ -77,7 +77,8 @@ function categorize(p) {
   return "social";
 }
 
-const state = { projects: [], filter: "todo" };
+const INDEX_PAGE = 10; // filas visibles por tanda en el archivo
+const state = { projects: [], filter: "todo", visible: INDEX_PAGE };
 let lenis = null; // instancia de smooth scroll; se pausa con el modal abierto
 const $ = (sel) => document.querySelector(sel);
 
@@ -195,6 +196,7 @@ function renderFilters() {
     btn.setAttribute("aria-pressed", String(cat.key === state.filter));
     btn.addEventListener("click", () => {
       state.filter = cat.key;
+      state.visible = INDEX_PAGE; // cambiar de filtro reinicia la paginación
       wrap.querySelectorAll("button").forEach((b) => {
         b.classList.toggle("active", b === btn);
         b.setAttribute("aria-pressed", String(b === btn));
@@ -210,9 +212,10 @@ function renderIndex() {
   wrap.innerHTML = "";
   const preview = $("#index-preview");
   const previewImg = preview.querySelector("img");
-  const list = state.projects.filter(
+  const all = state.projects.filter(
     (p) => state.filter === "todo" || p.category === state.filter
   );
+  const list = all.slice(0, state.visible);
 
   list.forEach((p, i) => {
     const row = document.createElement("div");
@@ -239,6 +242,23 @@ function renderIndex() {
     });
     wrap.appendChild(row);
   });
+
+  // "Mostrar más" si quedan proyectos por listar
+  const remaining = all.length - list.length;
+  if (remaining > 0) {
+    const moreWrap = document.createElement("div");
+    moreWrap.className = "index-more";
+    const more = document.createElement("button");
+    more.className = "index-more-btn";
+    more.dataset.hover = "";
+    more.textContent = `Mostrar más ✦ ${remaining} restantes`;
+    more.addEventListener("click", () => {
+      state.visible += INDEX_PAGE;
+      renderIndex();
+    });
+    moreWrap.appendChild(more);
+    wrap.appendChild(moreWrap);
+  }
 
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
@@ -450,6 +470,67 @@ function splitHeroTitle() {
   return chars;
 }
 
+/* ---------- Ciclo del hero: nombre ↔ servicios con efecto typewriter ---------- */
+const SERVICE_WORDS = [
+  "MOTION GRAPHICS", "BRANDING", "VIDEO", "SOCIAL MEDIA", "DISEÑO", "ILUSTRACIÓN",
+];
+const HOME_WORD = "RAMÍREZ";
+
+function startTitleCycle(line) {
+  if (!line) return;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const caret = document.createElement("span");
+  caret.className = "type-caret";
+  line.classList.add("cycling");
+
+  // altura fija para que el hero no salte cuando la fuente encoge
+  line.style.minHeight = `${line.getBoundingClientRect().height}px`;
+
+  function fit() {
+    line.style.fontSize = "";
+    const max = line.parentElement.clientWidth;
+    let size = parseFloat(getComputedStyle(line).fontSize);
+    let guard = 40;
+    while (line.scrollWidth > max && size > 18 && guard--) {
+      size *= 0.93;
+      line.style.fontSize = `${size}px`;
+    }
+  }
+
+  function render(txt) {
+    line.textContent = txt;
+    line.appendChild(caret);
+    fit();
+  }
+
+  async function typeWord(word, current) {
+    for (let i = current.length; i >= 0; i--) {
+      render(current.slice(0, i));
+      await sleep(26);
+    }
+    await sleep(200);
+    for (let i = 1; i <= word.length; i++) {
+      render(word.slice(0, i));
+      await sleep(58);
+    }
+  }
+
+  (async () => {
+    let current = HOME_WORD;
+    // el ciclo corre mientras el hero esté a la vista (se pausa fuera)
+    while (true) {
+      for (const w of SERVICE_WORDS) {
+        await typeWord(w, current);
+        current = w;
+        await sleep(1500);
+      }
+      await typeWord(HOME_WORD, current);
+      current = HOME_WORD;
+      await sleep(5000);
+    }
+  })();
+}
+
 /* ---------- Animaciones (GSAP + Lenis) ---------- */
 function startMotion() {
   const title = $(".hero-title");
@@ -477,17 +558,19 @@ function startMotion() {
       duration: 1.2, ease: "expo.out",
       stagger: { each: 0.045 }, delay: 0.25,
     });
-    // micro-interacción: onda al pasar el mouse
+    // micro-interacción: onda al pasar el mouse (chars vivos en ese momento)
     let waving = false;
     title.addEventListener("mouseenter", () => {
       if (waving) return;
       waving = true;
-      gsap.to(chars, {
+      gsap.to(title.querySelectorAll(".char"), {
         yPercent: -7, duration: 0.24, ease: "power2.out",
         stagger: { each: 0.018 }, yoyo: true, repeat: 1,
         onComplete: () => { waving = false; },
       });
     });
+    // tras el reveal, la línea violeta cicla nombre ↔ servicios (typewriter)
+    setTimeout(() => startTitleCycle(title.querySelector(".line.accent")), 4200);
   }
 
   // Smooth scroll
