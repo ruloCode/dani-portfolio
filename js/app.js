@@ -249,30 +249,25 @@ function startGeoFall() {
   }
   track.querySelectorAll(".geo-fig").forEach((f) => { f.style.display = "none"; });
 
-  // MUNDO EXTENDIDO: del tope del track al FONDO de "Sobre mí" — las piezas
-  // caen literalmente sobre esa sección y rebotan en la card
-  const aboutSect = document.querySelector(".about");
+  // El PISO es la línea superior de la card de "Sobre mí", a todo lo ancho:
+  // las piezas caen, rebotan sobre ese borde y JAMÁS lo cruzan
   const aboutCard = document.querySelector(".about-card");
-  const aRect = aboutSect.getBoundingClientRect();
   const cRect = aboutCard.getBoundingClientRect();
+  // la card puede estar a mitad de su entrada GSAP (y: 50→0): medir su
+  // posición FINAL descontando el translate vigente
+  const cardTy = window.gsap ? Number(gsap.getProperty(aboutCard, "y")) || 0 : 0;
   const W = track.clientWidth;
-  const floorY = aRect.bottom - tRect.top - 6;
+  // -10: colchón para los desbordes visuales (barras de la X, bracitos)
+  const floorY = cRect.top - cardTy - tRect.top - 10;
 
   const engine = Engine.create();
   engine.gravity.y = 1.35;
   const wallOpts = { isStatic: true, restitution: 0.35 };
   const statics = [
-    Bodies.rectangle(W / 2, floorY + 60, W + 400, 120, wallOpts),            // piso: fondo de Sobre mí
-    Bodies.rectangle(W / 2, -130, W + 400, 120, wallOpts),                   // techo (para la flotación)
-    Bodies.rectangle(-58, floorY / 2, 120, floorY + 600, wallOpts),          // izquierda
-    Bodies.rectangle(W + 58, floorY / 2, 120, floorY + 600, wallOpts),       // derecha
-    // la card de Sobre mí es un obstáculo real: las piezas rebotan encima
-    Bodies.rectangle(
-      cRect.left - tRect.left + cRect.width / 2,
-      cRect.top - tRect.top + cRect.height / 2,
-      cRect.width, cRect.height,
-      { isStatic: true, restitution: 0.4 }
-    ),
+    Bodies.rectangle(W / 2, floorY + 60, W + 400, 120, wallOpts),      // piso: borde de la card
+    Bodies.rectangle(W / 2, -130, W + 400, 120, wallOpts),             // techo (para la flotación)
+    Bodies.rectangle(-58, floorY / 2, 120, floorY + 600, wallOpts),    // izquierda
+    Bodies.rectangle(W + 58, floorY / 2, 120, floorY + 600, wallOpts), // derecha
   ];
   const bodies = items.map((it) => {
     const cx = it.x + it.w / 2;
