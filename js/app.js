@@ -488,14 +488,16 @@ function startTitleCycle(line) {
 
   function fit() {
     line.style.fontSize = "";
-    const max = line.parentElement.clientWidth;
+    // margen de seguridad: sin él, el redondeo subpixel recorta la última letra
+    const max = line.parentElement.clientWidth - 10;
     let size = parseFloat(getComputedStyle(line).fontSize);
-    let guard = 40;
-    while (line.scrollWidth > max && size > 18 && guard--) {
-      size *= 0.93;
+    let guard = 60;
+    while (line.scrollWidth > max && size > 14 && guard--) {
+      size *= 0.94;
       line.style.fontSize = `${size}px`;
     }
   }
+  window.addEventListener("resize", fit);
 
   function render(txt) {
     line.textContent = txt;

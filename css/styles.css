@@ -172,9 +172,10 @@ body {
   width: 0.09em; height: 0.78em;
   margin-left: 0.08em; margin-top: 0.12em;
   background: var(--acid);
-  animation: caret-blink 0.85s steps(1) infinite;
+  /* pulso suave al ritmo de la onda — nada de parpadeo duro */
+  animation: caret-pulse 2.6s ease-in-out infinite;
 }
-@keyframes caret-blink { 50% { opacity: 0; } }
+@keyframes caret-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 /* sin flash: el título espera al split de JS; startMotion siempre agrega .ready */
 .js .hero-title { opacity: 0; }
 .js .hero-title.ready { opacity: 1; }
