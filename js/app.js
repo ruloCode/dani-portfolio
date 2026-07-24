@@ -118,7 +118,76 @@ async function init() {
   bindTilt();
   animateCounters();
   startDecoPhysics();
+  startGeoShow();
   startMotion();
+}
+
+/* Show de color en la sección de geometría: cada ~4s muta la paleta (crossfade
+   CSS) y, alternadamente, recompone las figuras rotando una fila de piezas
+   entre ellas (FLIP). Expertise en color, en vivo. Pausa fuera de viewport. */
+const PALETTES = [
+  { name: "Marca", colors: ["#7c3aed", "#a78bfa", "#f5d90a", "#191430"] },
+  { name: "Kinder", colors: ["#2fa98c", "#e5a9d4", "#d9a942", "#a65c54"] },
+  { name: "Retro pop", colors: ["#ef476f", "#ffd166", "#06d6a0", "#073b4c"] },
+  { name: "Bauhaus", colors: ["#d90429", "#ffc300", "#3a86ff", "#001219"] },
+  { name: "Vaporwave", colors: ["#ff71ce", "#01cdfe", "#fffb96", "#2d1b69"] },
+];
+
+function startGeoShow() {
+  const geo = document.querySelector(".geo");
+  if (!geo) return;
+  const nameEl = document.getElementById("geo-palette-name");
+  const swatches = document.querySelectorAll("#geo-swatches i");
+
+  let idx = 0;
+  let cycle = 0;
+  let inView = false;
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; }, { threshold: 0.2 })
+    .observe(geo);
+
+  function applyPalette(p) {
+    p.colors.forEach((c, i) => geo.style.setProperty(`--p${i + 1}`, c));
+    nameEl.textContent = p.name;
+    swatches.forEach((s, i) => { s.style.backgroundColor = p.colors[i]; });
+  }
+  applyPalette(PALETTES[0]);
+
+  function figures() {
+    return [...geo.querySelectorAll(".geo-fig")].filter((f) => f.offsetParent !== null);
+  }
+
+  // rota la fila `pick` (0 = cabezas, -1 = piernas) una figura a la derecha
+  function recompose() {
+    if (!window.gsap || !window.Flip) return;
+    const figs = figures();
+    if (figs.length < 2) return;
+    const pick = cycle % 4 === 1 ? 0 : -1;
+    const parts = figs.map((f) => {
+      const g = f.querySelectorAll(":scope > .g");
+      return pick === 0 ? g[0] : g[g.length - 1];
+    });
+    if (parts.some((p) => !p)) return;
+
+    geo.classList.add("geo-morphing");
+    const state = Flip.getState(parts);
+    parts.forEach((part, i) => {
+      const dest = figs[(i + 1) % figs.length];
+      if (pick === 0) dest.insertBefore(part, dest.firstElementChild);
+      else dest.appendChild(part);
+    });
+    Flip.from(state, {
+      duration: 1, ease: "power2.inOut", absolute: true, stagger: 0.05,
+      onComplete: () => geo.classList.remove("geo-morphing"),
+    });
+  }
+
+  setInterval(() => {
+    if (!inView || document.hidden) return;
+    cycle++;
+    idx = (idx + 1) % PALETTES.length;
+    applyPalette(PALETTES[idx]);
+    if (cycle % 2 === 1) recompose();
+  }, 4000);
 }
 
 /* Física de la textura de fondo: cada shape deriva y REBOTA en los bordes de
@@ -650,6 +719,7 @@ function startMotion() {
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
+  if (window.Flip) gsap.registerPlugin(Flip);
 
   // Reveal AAA del nombre: máscara por línea + stagger por caracter
   {

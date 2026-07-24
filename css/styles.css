@@ -416,6 +416,33 @@ body {
    scroll). El motion graphics vive en las FORMAS — sin pelear por transform. */
 .geo-fig { display: flex; flex-direction: column; align-items: center; }
 .g { position: relative; }
+
+/* Show de paletas: dentro de .geo los slots de color son variables que el JS
+   muta — el crossfade lo hace la transición de background/border. */
+.geo { --p1: var(--violet); --p2: var(--violet-soft); --p3: var(--acid); --p4: var(--text); }
+.geo .c-violet { --c: var(--p1); }
+.geo .c-lila { --c: var(--p2); }
+.geo .c-acid { --c: var(--p3); }
+.geo .c-ink { --c: var(--p4); }
+.geo .g, .geo .g::before, .geo .g::after {
+  transition: background-color 0.9s ease, border-color 0.9s ease;
+}
+.geo .arm-r::before, .geo .arm-l::before { background: var(--p2); }
+.geo .arm-acid::before { background: var(--p3); }
+/* durante la recomposición FLIP, las formas ceden su transform */
+.geo-morphing .g { animation: none !important; }
+
+.geo-label {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  color: var(--text-dim); margin-bottom: 2.4rem;
+}
+#geo-palette-name { color: var(--text); min-width: 5.5rem; text-align: left; }
+.geo-swatches { display: inline-flex; gap: 0.35rem; margin-left: 0.4rem; }
+.geo-swatches i {
+  width: 11px; height: 11px; border-radius: 50%;
+  border: 1px solid rgba(25, 20, 48, 0.12);
+  transition: background-color 0.9s ease;
+}
 .geo .g-x, .deco .g-x { animation: g-wiggle 5s ease-in-out infinite alternate; }
 .geo .g-donut, .deco .g-donut { animation: g-pulse 4s ease-in-out infinite alternate; }
 .geo .g-circle, .deco .g-circle { animation: g-float 3.6s ease-in-out infinite alternate; }
