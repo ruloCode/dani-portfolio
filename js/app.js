@@ -117,7 +117,78 @@ async function init() {
   // el tilt incluye cards renderizadas arriba; motion revela el hero pase lo que pase
   bindTilt();
   animateCounters();
+  startDecoPhysics();
   startMotion();
+}
+
+/* Física de la textura de fondo: cada shape deriva y REBOTA en los bordes de
+   su sección, con rotación lenta. Profundidad: los lejanos (impares, borrosos)
+   van a media velocidad. Pausa fuera de viewport y con el tab oculto. */
+function startDecoPhysics() {
+  const items = [];
+  const visible = new Map();
+  const io = new IntersectionObserver((es) => {
+    for (const e of es) visible.set(e.target, e.isIntersecting);
+  }, { rootMargin: "80px" });
+
+  document.querySelectorAll(".deco").forEach((deco) => {
+    io.observe(deco);
+    [...deco.children].forEach((el, i) => {
+      const far = i % 2 === 0; // nth-child(odd) en CSS = índice par aquí
+      items.push({
+        el, deco,
+        x: 0, y: 0, r: Math.random() * 8 - 4,
+        vx: (18 + Math.random() * 16) * (Math.random() < 0.5 ? -1 : 1) * (far ? 0.5 : 1),
+        vy: (12 + Math.random() * 14) * (Math.random() < 0.5 ? -1 : 1) * (far ? 0.5 : 1),
+        vr: (Math.random() * 10 - 5) * (far ? 0.5 : 1),
+        baseL: 0, baseT: 0, w: 0, h: 0, W: 0, H: 0,
+      });
+    });
+  });
+  if (!items.length) return;
+
+  function measure() {
+    for (const it of items) {
+      // limpiar transform para medir la posición base real
+      it.el.style.transform = "";
+      it.baseL = it.el.offsetLeft; it.baseT = it.el.offsetTop;
+      it.w = it.el.offsetWidth; it.h = it.el.offsetHeight;
+      it.W = it.deco.clientWidth; it.H = it.deco.clientHeight;
+      it.x = Math.min(Math.max(it.x, -it.baseL), it.W - it.baseL - it.w);
+      it.y = Math.min(Math.max(it.y, -it.baseT), it.H - it.baseT - it.h);
+    }
+  }
+  measure();
+  let resizeT = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(measure, 200);
+  });
+
+  let last = performance.now();
+  function frame(now) {
+    requestAnimationFrame(frame);
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    if (document.hidden) return;
+    for (const it of items) {
+      if (!visible.get(it.deco)) continue;
+      it.x += it.vx * dt;
+      it.y += it.vy * dt;
+      it.r += it.vr * dt;
+      // rebote en los bordes de la sección
+      if (it.baseL + it.x <= 0 || it.baseL + it.x + it.w >= it.W) {
+        it.vx *= -1;
+        it.x = Math.min(Math.max(it.x, -it.baseL), it.W - it.baseL - it.w);
+      }
+      if (it.baseT + it.y <= 0 || it.baseT + it.y + it.h >= it.H) {
+        it.vy *= -1;
+        it.y = Math.min(Math.max(it.y, -it.baseT), it.H - it.baseT - it.h);
+      }
+      it.el.style.transform = `translate(${it.x.toFixed(1)}px, ${it.y.toFixed(1)}px) rotate(${it.r.toFixed(2)}deg)`;
+    }
+  }
+  requestAnimationFrame(frame);
 }
 
 /* Contadores del statement: incrementan al entrar en viewport — JS puro,
@@ -644,9 +715,10 @@ function startMotion() {
     opacity: 0, y: 40, duration: 0.9, ease: "power3.out",
   });
 
-  // Textura geométrica de fondo: deriva con el scroll de su sección
+  // Textura de fondo: la parallax de scroll va en el CONTENEDOR — la física
+  // de rebote es dueña del transform de cada shape (sin conflicto)
   document.querySelectorAll(".deco").forEach((d) => {
-    gsap.to(d.children, {
+    gsap.to(d, {
       scrollTrigger: { trigger: d.parentElement, start: "top bottom", end: "bottom top", scrub: true },
       y: -46, ease: "none",
     });

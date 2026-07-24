@@ -15,7 +15,18 @@
   --violet: #7c3aed;
   --violet-soft: #a78bfa;
   --acid: #f5d90a;
-  --shadow: 0 18px 50px rgba(25, 20, 48, 0.1);
+  /* Sistema de luz: fuente arriba — contacto (nítida) + ambiente + key (amplia),
+     y un filo de luz interior arriba que vende el volumen sobre crema. */
+  --edge-light: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --shadow-xs: 0 1px 2px rgba(25, 20, 48, 0.05), 0 2px 6px rgba(25, 20, 48, 0.04);
+  --shadow-sm: 0 1px 2px rgba(25, 20, 48, 0.06), 0 4px 10px rgba(25, 20, 48, 0.05),
+               0 12px 24px rgba(25, 20, 48, 0.05);
+  --shadow-md: 0 1px 2px rgba(25, 20, 48, 0.07), 0 6px 14px rgba(25, 20, 48, 0.06),
+               0 18px 36px rgba(25, 20, 48, 0.06), 0 32px 64px rgba(25, 20, 48, 0.05);
+  --shadow-lg: 0 2px 4px rgba(25, 20, 48, 0.08), 0 10px 22px rgba(25, 20, 48, 0.08),
+               0 28px 56px rgba(25, 20, 48, 0.1), 0 48px 96px rgba(25, 20, 48, 0.08);
+  --shadow: var(--shadow-md);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --font-display: "Unbounded", sans-serif;
   --font-body: "Sora", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
@@ -268,9 +279,14 @@ body {
   position: relative; overflow: hidden; border-radius: 18px;
   border: 1px solid var(--line);
   background: var(--panel);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-md), var(--edge-light);
   aspect-ratio: 16 / 11;
   transform-style: preserve-3d; perspective: 900px;
+  transition: transform 0.5s var(--ease-spring), box-shadow 0.5s var(--ease-spring);
+}
+.case:hover .case-media {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-lg), var(--edge-light);
 }
 .case-media img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -308,9 +324,14 @@ body {
   background: var(--paper-2); border: 1px solid var(--line); border-radius: 999px;
   color: var(--text-dim); padding: 0.42rem 1rem; cursor: pointer;
   font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
-  transition: all 0.2s;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.25s var(--ease-spring);
 }
-.filters button:hover { border-color: var(--violet); color: var(--text); }
+.filters button:hover {
+  border-color: var(--violet); color: var(--text);
+  transform: translateY(-2px); box-shadow: var(--shadow-sm);
+}
+.filters button:active { transform: translateY(0); box-shadow: var(--shadow-xs); }
 .filters button.active { background: var(--text); border-color: var(--text); color: var(--paper); font-weight: 500; }
 
 .index { border-top: 1px solid var(--line); }
@@ -367,11 +388,15 @@ body {
   border: 1px solid var(--line); border-radius: 18px;
   padding: 1.8rem 1.5rem 2rem;
   background: var(--panel);
-  box-shadow: 0 8px 28px rgba(25, 20, 48, 0.06);
-  transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: var(--shadow-sm), var(--edge-light);
+  transition: border-color 0.3s, transform 0.45s var(--ease-spring), box-shadow 0.45s var(--ease-spring);
   transform-style: preserve-3d; will-change: transform;
 }
-.exp-card:hover { border-color: var(--violet); box-shadow: var(--shadow); }
+.exp-card:hover {
+  border-color: var(--violet);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md), var(--edge-light);
+}
 .exp-num { color: var(--violet); display: block; margin-bottom: 2.2rem; }
 .exp-card h3 {
   font-family: var(--font-display); font-weight: 700; font-size: 1.02rem;
@@ -467,11 +492,18 @@ body {
 .deco {
   position: absolute; inset: 0; pointer-events: none; z-index: -1;
   --u: clamp(26px, 3.2vw, 42px);
+  overflow: hidden;
 }
-.deco .g { position: absolute; opacity: 0.16; }
+/* La física JS es dueña del transform de cada shape (rebote en bordes +
+   rotación); las animaciones CSS de formas quedan fuera en los decos. */
+.deco .g { position: absolute; opacity: 0.16; animation: none !important; will-change: transform; }
+/* Profundidad: impares = lejos (borroso, tenue, lento en JS); pares = cerca */
+.deco .g:nth-child(odd) { filter: blur(2px); opacity: 0.1; }
+.deco .g:nth-child(even) { opacity: 0.2; }
 @media (max-width: 620px) {
   .deco { --u: 22px; }
   .deco .g { opacity: 0.12; }
+  .deco .g:nth-child(odd) { opacity: 0.08; }
 }
 
 /* Sobre mí */
@@ -481,7 +513,7 @@ body {
   border: 1px solid var(--line); border-radius: 20px;
   padding: 2.6rem;
   background: linear-gradient(140deg, rgba(124, 58, 237, 0.06), transparent 55%), var(--panel);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-md), var(--edge-light);
   transform-style: preserve-3d; will-change: transform;
 }
 .about-avatar {
@@ -533,7 +565,8 @@ body {
   position: relative; z-index: 1;
   max-width: 980px; margin: 4vh auto; height: 92vh;
   background: var(--paper); border: 1px solid var(--line); border-radius: 18px;
-  box-shadow: 0 40px 120px rgba(25, 20, 48, 0.3);
+  box-shadow: 0 2px 6px rgba(25, 20, 48, 0.12), 0 18px 44px rgba(25, 20, 48, 0.18),
+              0 48px 120px rgba(25, 20, 48, 0.28), var(--edge-light);
   overflow-y: auto; overscroll-behavior: contain;
   animation: modal-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
