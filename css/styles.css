@@ -607,6 +607,25 @@ body {
   transition: color 0.3s;
 }
 .contact-title:hover .accent { color: var(--violet); }
+/* redes bien visibles bajo el CTA — pills grandes con hover invertido */
+.contact-socials {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem;
+  margin-top: 2.6rem; position: relative; z-index: 2;
+}
+.contact-socials a {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  border: 1.5px solid var(--line); border-radius: 999px;
+  padding: 0.7rem 1.5rem; font-size: 0.8rem;
+  color: var(--text); text-decoration: none; background: var(--panel);
+  box-shadow: var(--shadow-xs), var(--edge-light);
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s var(--ease-spring);
+}
+.contact-socials a svg { width: 15px; height: 15px; fill: var(--violet); transition: fill 0.3s; }
+.contact-socials a:hover {
+  background: var(--text); color: var(--paper); border-color: var(--text);
+  transform: translateY(-3px);
+}
+.contact-socials a:hover svg { fill: var(--acid); }
 
 /* Footer */
 .footer {
