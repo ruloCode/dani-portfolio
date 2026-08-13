@@ -119,6 +119,7 @@ async function init() {
   animateCounters();
   startDecoPhysics();
   startGeoShow();
+  startAiReel();
   startMotion();
 
   // fallback del disparo de la caída sin GSAP/ScrollTrigger (CDN caído)
@@ -820,6 +821,35 @@ function bindTilt() {
   });
 }
 
+/* ---------- IA: los loops solo corren en viewport; ABI con sonido opcional ---------- */
+function startAiReel() {
+  const cards = document.querySelectorAll(".ai-card");
+  if (!cards.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const v = e.target.querySelector("video");
+      if (!v) continue;
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }
+  }, { threshold: 0.35 });
+  cards.forEach((c) => io.observe(c));
+
+  const abi = document.querySelector(".ai-card-abi");
+  const btn = abi?.querySelector(".ai-sound");
+  const video = abi?.querySelector("video");
+  if (btn && video) {
+    btn.addEventListener("click", () => {
+      video.muted = !video.muted;
+      // con sonido la pieza arranca de cero: se escucha completa, no a mitad
+      if (!video.muted) video.currentTime = 0;
+      btn.setAttribute("aria-pressed", String(!video.muted));
+      btn.textContent = video.muted ? "♪ Sonido" : "♪ Silenciar";
+    });
+  }
+}
+
 /* ---------- Reloj Bogotá ---------- */
 function startClock() {
   const el = $("#local-time");
@@ -851,7 +881,7 @@ function splitHeroTitle() {
 
 /* ---------- Ciclo del hero: nombre ↔ servicios con efecto typewriter ---------- */
 const SERVICE_WORDS = [
-  "MOTION GRAPHICS", "BRANDING", "VIDEO", "SOCIAL MEDIA", "DISEÑO", "ILUSTRACIÓN",
+  "MOTION GRAPHICS", "BRANDING", "VIDEO", "IA GENERATIVA", "SOCIAL MEDIA", "DISEÑO", "ILUSTRACIÓN",
 ];
 const HOME_WORD = "RAMÍREZ";
 
