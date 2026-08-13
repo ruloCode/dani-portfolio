@@ -70,8 +70,9 @@
 
   /* ---- Retrato + figuras (la foto es el foco) ---- */
   .portrait-wrap {
-    position: absolute; right: 96px; top: 47%; transform: translateY(-50%);
-    width: 400px; height: 400px;
+    /* mismo centro que con 400px (x≈904): 30% más pequeña sin desbalancear */
+    position: absolute; right: 156px; top: 47%; transform: translateY(-50%);
+    width: 280px; height: 280px;
   }
   .portrait {
     position: absolute; inset: 0; z-index: 5; border-radius: 50%; object-fit: cover;
