@@ -1011,17 +1011,21 @@ function startMotion() {
     opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.14, delay: 0.15,
   });
 
-  // El hero se disuelve al salir — todo interactúa con el scroll
+  // El hero se disuelve al SALIR, no mientras se está leyendo. Arrancar en
+  // "top top" lo desvanecía desde el primer píxel de scroll: bastaba un toque
+  // de rueda para dejar el nombre medio transparente a pantalla completa.
   gsap.to(".hero-inner", {
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom 35%", scrub: true },
+    scrollTrigger: { trigger: ".hero", start: "35% top", end: "bottom 45%", scrub: true },
     yPercent: -10, opacity: 0.25, ease: "none",
   });
 
-  // Títulos de sección: parallax scrub al entrar
+  // Títulos de sección: parallax scrub al entrar. La opacidad se resuelve
+  // pronto (a 3/4 de pantalla ya está sólido) — si no, el título se lee
+  // translúcido durante medio viewport de scroll.
   document.querySelectorAll(".section-title").forEach((el) => {
     gsap.from(el, {
-      scrollTrigger: { trigger: el, start: "top 96%", end: "top 58%", scrub: true },
-      y: 36, opacity: 0.25, ease: "none",
+      scrollTrigger: { trigger: el, start: "top 96%", end: "top 75%", scrub: true },
+      y: 36, opacity: 0.4, ease: "none",
     });
   });
 
