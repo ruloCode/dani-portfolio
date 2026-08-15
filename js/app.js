@@ -836,18 +836,30 @@ function startAiReel() {
   }, { threshold: 0.35 });
   cards.forEach((c) => io.observe(c));
 
-  const abi = document.querySelector(".ai-card-abi");
-  const btn = abi?.querySelector(".ai-sound");
-  const video = abi?.querySelector("video");
-  if (btn && video) {
+  // varias piezas tienen locución: cualquiera con botón puede sonar, pero solo
+  // una a la vez — encender una silencia el resto
+  const btns = [...document.querySelectorAll(".ai-card .ai-sound")];
+  const sync = (btn, v) => {
+    btn.setAttribute("aria-pressed", String(!v.muted));
+    btn.textContent = v.muted ? "♪ Sonido" : "♪ Silenciar";
+  };
+  btns.forEach((btn) => {
+    const video = btn.closest(".ai-card")?.querySelector("video");
+    if (!video) return;
     btn.addEventListener("click", () => {
       video.muted = !video.muted;
-      // con sonido la pieza arranca de cero: se escucha completa, no a mitad
-      if (!video.muted) video.currentTime = 0;
-      btn.setAttribute("aria-pressed", String(!video.muted));
-      btn.textContent = video.muted ? "♪ Sonido" : "♪ Silenciar";
+      if (!video.muted) {
+        btns.forEach((other) => {
+          const v = other.closest(".ai-card")?.querySelector("video");
+          if (other !== btn && v && !v.muted) { v.muted = true; sync(other, v); }
+        });
+        // con sonido la pieza arranca de cero: se escucha completa, no a mitad
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+      sync(btn, video);
     });
-  }
+  });
 }
 
 /* ---------- Reloj Bogotá ---------- */
@@ -881,7 +893,7 @@ function splitHeroTitle() {
 
 /* ---------- Ciclo del hero: nombre ↔ servicios con efecto typewriter ---------- */
 const SERVICE_WORDS = [
-  "MOTION GRAPHICS", "BRANDING", "VIDEO", "IA GENERATIVA", "SOCIAL MEDIA", "DISEÑO", "ILUSTRACIÓN",
+  "MOTION GRAPHICS", "BRANDING", "VIDEO", "IA GENERATIVA", "SOCIAL MEDIA", "DISEÑO", "DISEÑO UI",
 ];
 const HOME_WORD = "RAMÍREZ";
 

@@ -382,7 +382,7 @@ body {
 /* Expertise */
 .expertise { max-width: 1280px; margin: 0 auto; padding: 5rem 2rem; }
 .expertise-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
 }
 .exp-card {
   border: 1px solid var(--line); border-radius: 18px;
@@ -408,6 +408,22 @@ body {
 
 /* IA — loops verticales 9:16 generados con IA */
 .ai { max-width: 1280px; margin: 0 auto; padding: 5rem 2rem; position: relative; }
+/* fila destacada: las dos piezas COMPLETAS (con locución) mandan sobre los
+   loops. Columnas topadas a 320px — a ancho completo un 9:16 se va a ~1100px
+   de alto y se come la sección. */
+.ai-featured {
+  display: grid; gap: 1.4rem; margin-bottom: 1.4rem;
+  grid-template-columns: repeat(2, minmax(0, 320px)) minmax(0, 1fr);
+  align-items: start;
+}
+.ai-featured .ai-card figcaption { font-size: 0.68rem; }
+.ai-featured-note { padding-top: 0.4rem; }
+.ai-featured-note h3 {
+  color: var(--violet); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 0.9rem;
+}
+.ai-featured-note p { color: var(--text-mid); font-size: 0.95rem; max-width: 34rem; }
+.ai-featured-hint { color: var(--text-dim); margin-top: 1rem; }
 .ai-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
 .ai-card {
   position: relative; margin: 0; aspect-ratio: 9 / 16;
@@ -706,6 +722,9 @@ body.modal-open { overflow: hidden; }
   .case:nth-child(even) .case-media { order: 0; }
   .expertise-grid { grid-template-columns: repeat(2, 1fr); }
   .ai-grid { grid-template-columns: repeat(3, 1fr); }
+  /* el texto de la campaña pasa debajo del par de spots */
+  .ai-featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-featured-note { grid-column: 1 / -1; }
   .index-preview { display: none; }
   .section-note { text-align: left; }
   .statement { padding-top: 5rem; }
@@ -742,6 +761,8 @@ body.modal-open { overflow: hidden; }
   .hero-sub { color: var(--text); }
   .work, .archive, .expertise, .about, .contact, .statement, .ai { padding-left: 1.2rem; padding-right: 1.2rem; }
   .expertise-grid { grid-template-columns: 1fr; }
+  /* móvil: cada spot completo a ancho de pantalla, uno debajo del otro */
+  .ai-featured { grid-template-columns: 1fr; gap: 1rem; }
   /* móvil: los loops de IA en tira horizontal con snap — como stories */
   .ai-grid {
     grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 72%;
