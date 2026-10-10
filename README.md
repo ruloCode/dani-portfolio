@@ -3,7 +3,7 @@
 Portafolio de **Daniela Ramírez O**, diseñadora gráfica y motion designer en Bogotá.
 Sitio estático generado a partir de su perfil de Behance ([dannyromo615c](https://www.behance.net/dannyromo615c)).
 
-**🌐 En vivo:** https://dani-portfolio-virid.vercel.app
+**🌐 En vivo:** https://www.daniramirez.co
 **Repo:** https://github.com/ruloCode/dani-portfolio
 
 ## Estructura
